@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum ApiResponse<T,NetworkError> {
-    case success(T)
+enum ApiResponse<Response,NetworkError> {
+    case success(Response)
     case failure(NetworkError)
 }
 

@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - Items
-struct Items: Codable {
+struct Items: BaseModel,Codable {
     let status:String
     let error: String?
     let data: ItemsList

@@ -8,7 +8,7 @@ import Foundation
 
 
 // MARK: - Item
-struct Item: Codable {
+struct Item: BaseModel,Codable {
     let name, price: String
     let image: String
     let extra: String?

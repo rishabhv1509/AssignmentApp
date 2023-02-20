@@ -25,7 +25,7 @@ struct NetworkClient{
         
         session.dataTask(with: url) { data, response, error in
             if error != nil {
-                completion(.failure(.invalidData))
+                 completion(.failure(.invalidData))
                 return
             }
             
@@ -33,7 +33,7 @@ struct NetworkClient{
                 switch httpResponse.statusCode {
                 case 200..<300:
                     if let data = data {
-                        completion(.success(data))
+                      completion(.success(data))
                         return
                     } else {
                         completion(.failure(.invalidData))

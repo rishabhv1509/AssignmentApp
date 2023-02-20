@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - ItemsList
-struct ItemsList: Codable {
+struct ItemsList:BaseModel ,Codable {
     let items: [Item]
 }
 

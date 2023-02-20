@@ -17,3 +17,7 @@ enum NetworkError: String,LocalizedError {
     
 }
 
+enum DecodingErrors : String, LocalizedError{
+    case decodeError = "Some error occured while decoding"
+}
+

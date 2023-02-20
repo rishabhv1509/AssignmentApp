@@ -24,6 +24,10 @@
 		18541B63299F523A00D3B959 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18541B62299F523A00D3B959 /* NetworkClient.swift */; };
 		18659C4029A3CA2E003DDB0F /* ResponseEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C3F29A3CA2E003DDB0F /* ResponseEnums.swift */; };
 		18659C4229A3CA3D003DDB0F /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C4129A3CA3D003DDB0F /* ErrorEnums.swift */; };
+		18659C4629A40D8C003DDB0F /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C4529A40D8C003DDB0F /* ApiService.swift */; };
+		18659C4829A40EA2003DDB0F /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C4729A40EA2003DDB0F /* BaseModel.swift */; };
+		18659C4C29A429AB003DDB0F /* DataWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C4B29A429AB003DDB0F /* DataWrapper.swift */; };
+		18659C4F29A429F3003DDB0F /* StoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C4E29A429F3003DDB0F /* StoreRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,10 @@
 		18541B62299F523A00D3B959 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		18659C3F29A3CA2E003DDB0F /* ResponseEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseEnums.swift; sourceTree = "<group>"; };
 		18659C4129A3CA3D003DDB0F /* ErrorEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
+		18659C4529A40D8C003DDB0F /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		18659C4729A40EA2003DDB0F /* BaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		18659C4B29A429AB003DDB0F /* DataWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataWrapper.swift; sourceTree = "<group>"; };
+		18659C4E29A429F3003DDB0F /* StoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +163,7 @@
 		18541B52299F2F9600D3B959 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				18659C4D29A429DA003DDB0F /* Repository */,
 				18541B5F299F4A5000D3B959 /* Network */,
 				18541B53299F2F9F00D3B959 /* Models */,
 			);
@@ -168,6 +177,8 @@
 				18541B54299F2FC600D3B959 /* ItemModel.swift */,
 				18541B56299F44EF00D3B959 /* ItemsListModel.swift */,
 				18541B5B299F454E00D3B959 /* ItemsModel.swift */,
+				18659C4729A40EA2003DDB0F /* BaseModel.swift */,
+				18659C4B29A429AB003DDB0F /* DataWrapper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -179,8 +190,17 @@
 				18541B62299F523A00D3B959 /* NetworkClient.swift */,
 				18659C3F29A3CA2E003DDB0F /* ResponseEnums.swift */,
 				18659C4129A3CA3D003DDB0F /* ErrorEnums.swift */,
+				18659C4529A40D8C003DDB0F /* ApiService.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		18659C4D29A429DA003DDB0F /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				18659C4E29A429F3003DDB0F /* StoreRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,14 +336,18 @@
 			files = (
 				18659C4029A3CA2E003DDB0F /* ResponseEnums.swift in Sources */,
 				18541B5C299F454E00D3B959 /* ItemsModel.swift in Sources */,
+				18659C4629A40D8C003DDB0F /* ApiService.swift in Sources */,
+				18659C4829A40EA2003DDB0F /* BaseModel.swift in Sources */,
 				18541B5E299F464B00D3B959 /* EncoderDecoder.swift in Sources */,
 				18541B57299F44EF00D3B959 /* ItemsListModel.swift in Sources */,
 				18541B61299F4A6100D3B959 /* Urls.swift in Sources */,
 				1840C6B8299A95A40090EEE1 /* ViewController.swift in Sources */,
 				18541B63299F523A00D3B959 /* NetworkClient.swift in Sources */,
+				18659C4C29A429AB003DDB0F /* DataWrapper.swift in Sources */,
 				1840C6B4299A95A40090EEE1 /* AppDelegate.swift in Sources */,
 				18659C4229A3CA3D003DDB0F /* ErrorEnums.swift in Sources */,
 				18541B55299F2FC600D3B959 /* ItemModel.swift in Sources */,
+				18659C4F29A429F3003DDB0F /* StoreRepository.swift in Sources */,
 				1840C6B6299A95A40090EEE1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
