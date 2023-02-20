@@ -1,12 +1,12 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
-//   let items = try Items(json)
+//   let store = try StoreResponseModel(json)
 
 import Foundation
 
 // MARK: - Items
-struct Items: BaseModel,Codable {
+struct StoreResponseModel: BaseModel,Codable {
     let status:String
     let error: String?
     let data: ItemsList
@@ -14,9 +14,9 @@ struct Items: BaseModel,Codable {
 
 // MARK: Items convenience initializers and mutators
 
-extension Items {
+extension StoreResponseModel {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(Items.self, from: data)
+        self = try newJSONDecoder().decode(StoreResponseModel.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -34,8 +34,8 @@ extension Items {
         status: String? = nil,
         error: String? = nil,
         data: ItemsList? = nil
-    ) -> Items {
-        return Items(
+    ) -> StoreResponseModel {
+        return StoreResponseModel(
             status: status ?? self.status,
             error: error ?? self.error,
             data: data ?? self.data

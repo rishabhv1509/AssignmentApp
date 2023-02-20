@@ -18,7 +18,7 @@ class ApiService{
                 switch data {
                 case .success(let response):
                     do{
-                        self.storeData.response=try Items(data: response)
+                        self.storeData.response=try StoreResponseModel(data: response)
                         continuation.resume(returning: self.storeData)
                     }
                     catch{

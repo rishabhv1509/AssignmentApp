@@ -8,8 +8,8 @@
 import Foundation
 
 class StoreRepository{
-    func getStoreData()async->DataWrapper<Items,LocalizedError>{
+    func getStoreData()async->DataWrapper<StoreResponseModel,LocalizedError>{
        let storeData = await ApiService().getStoreData()
-        return DataWrapper<Items,LocalizedError>(response: storeData.response as? Items, error: storeData.error)
+        return DataWrapper<StoreResponseModel,LocalizedError>(response: storeData.response as? StoreResponseModel, error: storeData.error)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 class ViewModel : ObservableObject {
-    @Published var store: DataWrapper<Items,LocalizedError> = DataWrapper()
+    @Published var store: DataWrapper<StoreResponseModel,LocalizedError> = DataWrapper()
     func getStoreDetails() async {
         store.isLoading = true
         let result = await StoreRepository().getStoreData()
