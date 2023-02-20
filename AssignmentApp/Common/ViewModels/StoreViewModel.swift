@@ -1,5 +1,5 @@
 //
-//  ViewModel.swift
+//  StoreViewModel.swift
 //  AssignmentApp
 //
 //  Created by Rishabh Verma on 21/02/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ViewModel : ObservableObject {
+class StoreViewModel : ObservableObject {
     @Published var store: DataWrapper<StoreResponseModel,LocalizedError> = DataWrapper()
     func getStoreDetails() async {
         store.isLoading = true
