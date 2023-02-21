@@ -5,14 +5,14 @@
 
 import Foundation
 
-// MARK: - Items
+// MARK: - StoreResponseModel
 struct StoreResponseModel: BaseModel,Codable {
     let status:String
     let error: String?
     let data: ItemsList
 }
 
-// MARK: Items convenience initializers and mutators
+// MARK: StoreResponseModel convenience initializers and mutators
 
 extension StoreResponseModel {
     init(data: Data) throws {

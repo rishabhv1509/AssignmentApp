@@ -10,13 +10,11 @@ import Foundation
 class StoreViewModel : ObservableObject {
     @Published var store: DataWrapper<StoreResponseModel,LocalizedError> = DataWrapper()
     func getStoreDetails() async {
-        store.isLoading = true
         let result = await StoreRepository().getStoreData()
         if(result.error != nil) {
-            store.error = result.error
+            self.store.error = result.error
         } else {
-            store.response = result.response
+            self.store.response = result.response
         }
-        store.isLoading = false
     }
 }
