@@ -11,7 +11,7 @@ import UIKit
 
 class TableViewController:UIViewController,UITableViewDataSource,UITableViewDelegate{
     private var myTableView: UITableView!
-    private var storeItems:[Item]=[]
+    private var storeItems:ItemsList!
     private var viewModel: StoreViewModel = StoreViewModel()
     private var loader = LoaderView()
     
@@ -23,33 +23,36 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         myTableView.delegate = self
         myTableView.register(TableCell.self, forCellReuseIdentifier: TableCell.identifier)
         myTableView.showsVerticalScrollIndicator = true
+        
+        
         Task{
-          await  loadStoreData()
+            await  loadStoreData()
         }
     }
-
+    
     func loadStoreData()async{
         loader.startLoading(view: self.view)
         await viewModel.getStoreDetails()
-        storeItems=(viewModel.store.response?.data.items)!
+        storeItems=(viewModel.store.response?.data)!
         loader.stopLoading(view: self.view)
         self.myTableView.frame = CGRect(x: 0, y: 180, width: self.view.frame.size.width, height: self.view.frame.size.height - 180)
         self.view.addSubview(self.myTableView)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("storeItems.count", storeItems.count)
-        return storeItems.count
+        storeItems.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TableCell.identifier, for: indexPath) as! TableCell
-               let item = storeItems[indexPath.row]
-               cell.configureImageView(image: item.image)
-               cell.configureTitle(title: item.name )
-               cell.configureSubtitle(subtitle: item.price )
-               cell.configureSameDayShipping(shippingDay: item.extra)
-               return cell
+        let item = storeItems.items[indexPath.row]
+        cell.configureLeadingImage(image: item.image)
+        cell.configureTitle(title: item.name )
+        cell.configureSubtitle(subtitle: item.price )
+        cell.configureExtraSubtitle(shippingDay: item.extra)
+        cell.configureMrpSubtitle()
+        cell.selectionStyle = .none
+        return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         70
