@@ -1,5 +1,5 @@
 //
-//  ItemCell.swift
+//  TableCell.swift
 //  AssignmentApp
 //
 //  Created by Rishabh Verma on 21/02/23.
@@ -27,7 +27,7 @@ class TableCell:UITableViewCell{
         addSubview(divider)
         addSubview(mrpSubtitle)
         configureDivider()
-        _ = CellContraints(leadingImage: leadingImage, title: title, mrpSubtitle: mrpSubtitle, subTitle: subTitle, divider: divider, extraSubtitle: extraSubtitle, view: self)
+        _ = TableCellContraints(leadingImage: leadingImage, title: title, mrpSubtitle: mrpSubtitle, subTitle: subTitle, divider: divider, extraSubtitle: extraSubtitle, view: self)
     }
     
     required init?(coder: NSCoder) {
@@ -47,7 +47,7 @@ class TableCell:UITableViewCell{
                 self?.leadingImage.image = UIImage(data: data)
             }
         }
-    }
+    } 
     
 
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {

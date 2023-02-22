@@ -8,6 +8,10 @@
 import Foundation
 
 class StoreViewModel : ObservableObject {
+    static let instance = StoreViewModel()
+     init(){
+        
+    }
     @Published var store: DataWrapper<StoreResponseModel,LocalizedError> = DataWrapper()
     func getStoreDetails() async {
         let result = await StoreRepository().getStoreData()

@@ -20,6 +20,7 @@ struct Constants{
     static let subtitleToDividerTopPadding = 10.0
     static let imageRadius = 8.0
     static let imageTopPadding = 40.0
+    static let thumbnailImageSize = 110.0
     
     // MARK: Size Constants
     static let titleSize = 14.0

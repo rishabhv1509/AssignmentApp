@@ -10,19 +10,19 @@ import UIKit
 
 
 class TableViewController:UIViewController,UITableViewDataSource,UITableViewDelegate{
-    private var myTableView: UITableView!
+    private var tableView: UITableView!
     private var storeItems:ItemsList!
-    private var viewModel: StoreViewModel = StoreViewModel()
+    private var viewModel: StoreViewModel = StoreViewModel.instance
     private var loader = LoaderView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loader=LoaderView(frame: view.frame)
-        myTableView = UITableView(frame: view.frame)
-        myTableView.dataSource = self
-        myTableView.delegate = self
-        myTableView.register(TableCell.self, forCellReuseIdentifier: TableCell.identifier)
-        myTableView.showsVerticalScrollIndicator = true
+        loader = LoaderView(frame: view.frame)
+        tableView = UITableView(frame: view.frame)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(TableCell.self, forCellReuseIdentifier: TableCell.identifier)
+        tableView.showsVerticalScrollIndicator = true
         
         
         Task{
@@ -35,8 +35,8 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         await viewModel.getStoreDetails()
         storeItems=(viewModel.store.response?.data)!
         loader.stopLoading(view: self.view)
-        self.myTableView.frame = CGRect(x: 0, y: 180, width: self.view.frame.size.width, height: self.view.frame.size.height - 180)
-        self.view.addSubview(self.myTableView)
+        self.tableView.frame = CGRect(x: 0, y: 180, width: self.view.frame.size.width, height: self.view.frame.size.height - 180)
+        self.view.addSubview(self.tableView)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

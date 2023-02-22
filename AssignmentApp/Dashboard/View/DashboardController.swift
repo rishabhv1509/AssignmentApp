@@ -26,7 +26,7 @@ class DashboardViewController: UITabBarController {
 
     private func createBottomNavBar() {
         let listViewController = UINavigationController(rootViewController: TableViewController())
-        let gridViewController = UINavigationController(rootViewController: EmptyViewController())
+        let gridViewController = UINavigationController(rootViewController: GridViewController())
         let emptyController1 = UINavigationController(rootViewController: EmptyViewController())
         let emptyController2 = UINavigationController(rootViewController: EmptyViewController())
         let emptyController3 = UINavigationController(rootViewController: EmptyViewController())

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct CellContraints{
+struct TableCellContraints{
     var leadingImage,title,mrpSubtitle,subTitle,divider,extraSubtitle, view : UIView
     
     // MARK: initializing contraints on load
