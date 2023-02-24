@@ -13,7 +13,9 @@ class LoaderView: UIView {
     private var loader: UIActivityIndicatorView!
 
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
+        print("frame---", frame)
         loader = UIActivityIndicatorView(frame: frame)
         loader.style = .large
         

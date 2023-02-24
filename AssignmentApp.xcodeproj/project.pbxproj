@@ -45,6 +45,8 @@
 		18659C8029A75AE6003DDB0F /* AppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C7F29A75AE6003DDB0F /* AppBar.swift */; };
 		18659C8229A765FC003DDB0F /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C8129A765FC003DDB0F /* Strings.swift */; };
 		18659C8429A80E9D003DDB0F /* Sw-Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18659C8329A80E9D003DDB0F /* Sw-Inter-Medium.ttf */; };
+		18659C8629A9443B003DDB0F /* TableViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C8529A9443B003DDB0F /* TableViewConstraints.swift */; };
+		18659C8829A95405003DDB0F /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C8729A95405003DDB0F /* TableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,8 @@
 		18659C7F29A75AE6003DDB0F /* AppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBar.swift; sourceTree = "<group>"; };
 		18659C8129A765FC003DDB0F /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		18659C8329A80E9D003DDB0F /* Sw-Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sw-Inter-Medium.ttf"; sourceTree = "<group>"; };
+		18659C8529A9443B003DDB0F /* TableViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewConstraints.swift; sourceTree = "<group>"; };
+		18659C8729A95405003DDB0F /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +290,7 @@
 				18659C7429A609E2003DDB0F /* Constraints */,
 				18659C5F29A46BF1003DDB0F /* TableViewController.swift */,
 				18659C6429A4A899003DDB0F /* TableCell.swift */,
+				18659C8729A95405003DDB0F /* TableView.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 		18659C6129A49EE9003DDB0F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				18659C7F29A75AE6003DDB0F /* AppBar.swift */,
 				18659C6229A49EF8003DDB0F /* LoaderView.swift */,
 			);
 			path = Views;
@@ -330,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				18659C7529A609F1003DDB0F /* TableCellConstraints.swift */,
+				18659C8529A9443B003DDB0F /* TableViewConstraints.swift */,
 			);
 			path = Constraints;
 			sourceTree = "<group>";
@@ -345,7 +352,6 @@
 		18659C7E29A75AC5003DDB0F /* AppBar */ = {
 			isa = PBXGroup;
 			children = (
-				18659C7F29A75AE6003DDB0F /* AppBar.swift */,
 			);
 			path = AppBar;
 			sourceTree = "<group>";
@@ -492,6 +498,7 @@
 				18659C4629A40D8C003DDB0F /* ApiService.swift in Sources */,
 				18659C7029A5F9CB003DDB0F /* Constants.swift in Sources */,
 				18659C4829A40EA2003DDB0F /* BaseModel.swift in Sources */,
+				18659C8629A9443B003DDB0F /* TableViewConstraints.swift in Sources */,
 				18659C7829A61D65003DDB0F /* GridCell.swift in Sources */,
 				18659C5729A43461003DDB0F /* GridViewController.swift in Sources */,
 				18541B5E299F464B00D3B959 /* EncoderDecoder.swift in Sources */,
@@ -510,6 +517,7 @@
 				18659C4229A3CA3D003DDB0F /* ErrorEnums.swift in Sources */,
 				18541B55299F2FC600D3B959 /* ItemModel.swift in Sources */,
 				18659C6329A49EF8003DDB0F /* LoaderView.swift in Sources */,
+				18659C8829A95405003DDB0F /* TableView.swift in Sources */,
 				18659C8029A75AE6003DDB0F /* AppBar.swift in Sources */,
 				18659C4F29A429F3003DDB0F /* StoreRepository.swift in Sources */,
 				1840C6B6299A95A40090EEE1 /* SceneDelegate.swift in Sources */,

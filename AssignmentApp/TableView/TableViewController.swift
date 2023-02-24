@@ -15,74 +15,97 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
     private var viewModel: StoreViewModel = StoreViewModel.instance
     private var loader = LoaderView()
     private var tableView = UITableView()
-    private var appBarView = UIView()
-    private var appBar = AppBarController()
+    private var appBar = AppBarView()
+    private var stackView = UIStackView()
+ 
+    func configureStackView(){
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.alignment = .leading
+        stackView.distribution = .fill
+        stackView.spacing = 20
+
+        appBar.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let views = [ appBar, tableView]
+        for view in views {
+            stackView.addArrangedSubview(view)
+        }
+        view.addSubview(stackView)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loader = LoaderView(frame: view.frame)
-//        appBarView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: appBar.appBarHeight)
-        addSubviews()
-        setTableValues()
-        addConstraints()
-        print("height ---", appBar.appBarHeight)
+//        loader = LoaderView()
+        loader = LoaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+
         Task{
             await  loadStoreData()
         }
     }
-    
+    override func viewDidLayoutSubviews() {
+        view.addSubview(loader)
+        setTableValues()
+        configureStackView()
+        addConstraints()
+        
+        
+    }
     func setTableValues()  {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(TableCell.self, forCellReuseIdentifier: TableCell.identifier)
         tableView.showsVerticalScrollIndicator = true
         tableView.rowHeight = 80
-        tableView.frame = CGRect(x: 0, y: appBar.appBarHeight + 34, width: view.frame.width, height: self.view.frame.size.height - appBar.appBarHeight + 34)
+        tableView.frame = .zero
     }
     
-    func addSubviews() {
-        self.view.addSubview(tableView)
-        self.view.addSubview(self.appBarView)
-        self.appBarView.addSubview(self.appBar.view!)
-    }
+    
+    
     
     func addConstraints()  {
-        appBarView.translatesAutoresizingMaskIntoConstraints = false
+        appBar.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-//        let labelTop = NSLayoutConstraint(item: appBarView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-//
-//        let labelLeading = NSLayoutConstraint(item: appBarView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0 )
-        let appBarTop = NSLayoutConstraint(item: appBarView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-        let appBarLeading = NSLayoutConstraint(item: appBarView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 34)
-        let appBarTrailing = NSLayoutConstraint(item: appBarView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -34)
-        let tableBottom = NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 100)
-        let appBarBottom = NSLayoutConstraint(item: appBarView, attribute: .bottom, relatedBy: .equal, toItem: tableView, attribute: .top, multiplier: 1, constant: 100)
-        let tableTop = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: appBarView, attribute: .bottom, multiplier: 1, constant: 0)
-        let tableLeading = NSLayoutConstraint(item: tableView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 34)
-        let tableTrailing = NSLayoutConstraint(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -34)
-        let tableHeight = NSLayoutConstraint(item: tableView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 340)
-        let appBarHeight = NSLayoutConstraint(item: appBarView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: appBar.appBarHeight)
-
+        
+    
+        
+        let appBarTop = NSLayoutConstraint(item: appBar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
+        let tableTop = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: appBar, attribute: .bottom, multiplier: 1, constant: 20)
+        let appBarLeading = NSLayoutConstraint(item: appBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+        let appBarTrailing = NSLayoutConstraint(item: appBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
+        let tableBottom = NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 150)
+        let appBarBottom = NSLayoutConstraint(item: appBar, attribute: .bottom, relatedBy: .equal, toItem: tableView, attribute: .top, multiplier: 1, constant: 0)
+        
+        let tableLeading = NSLayoutConstraint(item: tableView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+        let tableTrailing = NSLayoutConstraint(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
+        let tableHeight = NSLayoutConstraint(item: tableView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.height)
+        let appBarHeight = NSLayoutConstraint(item: appBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: appBar.appBarHeight)
+        
         
         NSLayoutConstraint.activate(
             [
+                
+                tableLeading, tableTrailing,
+                appBarTop,
+//                                appBarBottom,
 
 //                tableTop,
-                tableLeading, tableTrailing,
-                appBarTop,appBarBottom,
-//                appBarLeading, appBarTrailing,
-//                appBarHeight
-
+                tableHeight,
+                appBarLeading, appBarTrailing,
+                appBarHeight
+                
             ]
         )
-       
+        
     }
     
     func loadStoreData()async{
-        loader.startLoading(view: self.view)
+//        parent?.view.
+        loader.startLoading(view: view)
         await viewModel.getStoreDetails()
         storeItems=(viewModel.store.response?.data)!
-        loader.stopLoading(view: self.view)
+        loader.stopLoading(view: view)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

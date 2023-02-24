@@ -15,7 +15,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     private var storeItems:ItemsList!
     
     override func viewDidLoad() {
-        
+         
         super.viewDidLoad()
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

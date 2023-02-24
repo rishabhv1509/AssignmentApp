@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AppBarController: UIViewController,UISearchBarDelegate {
+class AppBarView: UIView {
     
     private var searchBar = UISearchBar()
     private var exploreLabel = UILabel()
@@ -23,20 +23,29 @@ class AppBarController: UIViewController,UISearchBarDelegate {
             
         }
     }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupView()
+    }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let safeArea = view.safeAreaInsets
-         _appBarHeight = 160 + safeArea.top
+    func setupView(){
+        let safeArea = safeAreaInsets
+        _appBarHeight = 160 + safeArea.top
         
         let exploreTopPadding = 55 + safeArea.top
         
-        view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: appBarHeight)
-        view.backgroundColor = UIColor.blue
+        frame = CGRect(x: 0, y: 0, width: frame.width, height: appBarHeight)
+        backgroundColor = UIColor.blue
+        
         // Parent View
-        view.backgroundColor = Colors.appBarColor
-
+        backgroundColor = Colors.appBarColor
+        
         
         // Filter Label
         filterLabel.text = CommonStrings.filter
@@ -49,7 +58,7 @@ class AppBarController: UIViewController,UISearchBarDelegate {
         exploreLabel.font = UIFont(name: Constants.interBold, size: 18)
         
         // Search Bar
-        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 0))
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: 0))
         searchBar.searchTextField.backgroundColor = UIColor.clear
         searchBar.layer.cornerRadius = 25
         searchBar.barStyle = UIBarStyle.black
@@ -65,35 +74,34 @@ class AppBarController: UIViewController,UISearchBarDelegate {
         filterLabel.translatesAutoresizingMaskIntoConstraints = false
         
         // Adding views to subview
-        view.addSubview(searchBar)
-        view.addSubview(exploreLabel)
-        view.addSubview(filterLabel)
+        addSubview(searchBar)
+        addSubview(exploreLabel)
+        addSubview(filterLabel)
         
         addExploreLabelConstraint(height: exploreTopPadding)
         addFilterLabelConstraint(height: exploreTopPadding)
         addSearchBarConstraint()
     }
-    
     // MARK: - Constraints for Explore Label
     /// Constraints for Explore label
     private func addExploreLabelConstraint(height: CGFloat) {
 
-        let labelTop = NSLayoutConstraint(item: exploreLabel, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: height)
+        let labelTop = NSLayoutConstraint(item: exploreLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: height)
         
-        let labelLeading = NSLayoutConstraint(item: exploreLabel, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: Constants.explorePadding  )
+        let labelLeading = NSLayoutConstraint(item: exploreLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: Constants.explorePadding  )
         
-        view.addConstraints([labelTop, labelLeading])
+        addConstraints([labelTop, labelLeading])
     }
     
     // MARK: - Constraints for Filter Label
     /// Constraints for Explore label
     private func addFilterLabelConstraint(height : CGFloat) {
 
-        let filterTop = NSLayoutConstraint(item: filterLabel, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: height)
+        let filterTop = NSLayoutConstraint(item: filterLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: height)
         
-        let filterTrailing = NSLayoutConstraint(item: filterLabel, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -Constants.viewRightPadding)
+        let filterTrailing = NSLayoutConstraint(item: filterLabel, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -Constants.viewRightPadding)
         
-        view.addConstraints([filterTop, filterTrailing])
+        addConstraints([filterTop, filterTrailing])
     }
     
     // MARK: - Constraints for Search Bar
@@ -101,12 +109,12 @@ class AppBarController: UIViewController,UISearchBarDelegate {
     private func addSearchBarConstraint() {
         let searchBarTop = NSLayoutConstraint(item: searchBar, attribute: .top, relatedBy: .equal, toItem: exploreLabel, attribute: .bottom, multiplier: 1, constant: 15)
         
-        let searchLeading = NSLayoutConstraint(item: searchBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: Constants.viewLeftPadding)
+        let searchLeading = NSLayoutConstraint(item: searchBar, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: Constants.viewLeftPadding)
         
         let searchHeight = NSLayoutConstraint(item: searchBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
         
-        let searchTrailing = NSLayoutConstraint(item: searchBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -Constants.viewRightPadding)
+        let searchTrailing = NSLayoutConstraint(item: searchBar, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -Constants.viewRightPadding)
         
-        view.addConstraints([searchBarTop, searchLeading, searchHeight, searchTrailing])
+        addConstraints([searchBarTop, searchLeading, searchHeight, searchTrailing])
     }
 }
