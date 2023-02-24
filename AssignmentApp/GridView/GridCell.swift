@@ -27,7 +27,8 @@ class GridCell: UICollectionViewCell {
     
      func configureThumbnailImage(image: String?){
         thumbnailImage.layer.cornerRadius = Constants.imageRadius
-        thumbnailImage.contentMode = .scaleAspectFit
+        thumbnailImage.contentMode = .center
+         
         thumbnailImage.clipsToBounds = true
         downloadImage(from: URL(string:image!)!)
     }

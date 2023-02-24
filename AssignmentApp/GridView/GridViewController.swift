@@ -10,40 +10,75 @@ import UIKit
 
 class GridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    private var collectionView: UICollectionView!
+    private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var viewModel: StoreViewModel = StoreViewModel.instance
     private var storeItems:ItemsList!
+    private var appBar = AppBarView()
+    private var stackView = UIStackView()
     
     override func viewDidLoad() {
-         
+        
         super.viewDidLoad()
         
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        appBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        setupCollecctionView()
+        setupStackView()
+        
+       
+       
+      
+       
+       
+        let appBarTop = NSLayoutConstraint(item: appBar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
+        let tableTop = NSLayoutConstraint(item: collectionView, attribute: .top, relatedBy: .equal, toItem: appBar, attribute: .bottom, multiplier: 1, constant: 20)
+        let appBarLeading = NSLayoutConstraint(item: appBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+        let appBarTrailing = NSLayoutConstraint(item: appBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
+        let tableBottom = NSLayoutConstraint(item: collectionView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 150)
+        let appBarBottom = NSLayoutConstraint(item: appBar, attribute: .bottom, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
+        
+        let tableLeading = NSLayoutConstraint(item: collectionView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+        let tableTrailing = NSLayoutConstraint(item: collectionView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
+        let tableHeight = NSLayoutConstraint(item: collectionView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.height)
+        let appBarHeight = NSLayoutConstraint(item: appBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: appBar.appBarHeight)
+        
+        
+        NSLayoutConstraint.activate(
+            [
+                
+                tableLeading, tableTrailing,
+                appBarTop,
+               
+                tableHeight,
+                appBarLeading, appBarTrailing,
+                appBarHeight
+                
+            ]
+        )
+        
+        
+        
+    }
+    
+    func setupStackView(){
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .leading
+        stackView.distribution = .fill
+        stackView.spacing = 20
+        let views = [ appBar, collectionView]
+        for view in views {
+            stackView.addArrangedSubview(view)
+        }
+        view.addSubview(stackView)
+    }
+    func setupCollecctionView( ){
         collectionView.frame = view.bounds
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         storeItems = viewModel.store.response?.data
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(GridCell.self, forCellWithReuseIdentifier: GridCell.identifier)
-        collectionView.contentSize = CGSize(width: 100, height: 100)
-        view.addSubview(collectionView)
-        
-    }
-    
-    func layoutw()->UICollectionViewCompositionalLayout{
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1/2),
-            heightDimension: .fractionalWidth (1/2)))
-        
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(2/5)),
-            subitem: item,
-            count: 1)
-        
-        let sections = NSCollectionLayoutSection(group: group)
-        print("in here")
-        return UICollectionViewCompositionalLayout(section: sections)
-        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.store.response?.data.items.count ?? 0
@@ -57,7 +92,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         cell.configureThumbnailImage(image: item.image)
         return cell
     }
-   
+    
     //MARK: Building the width and height of the collection view layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (view.frame.size.width/3)-3, height: (view.frame.size.width/3)-3)

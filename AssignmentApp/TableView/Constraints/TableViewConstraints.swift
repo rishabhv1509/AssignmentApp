@@ -41,7 +41,7 @@ struct TableViewConstraints{
                 appBar.topAnchor.constraint(equalTo: view.topAnchor),
 //                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.viewLeftPadding),
 //                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.viewRightPadding),
-                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 //                appBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.viewLeftPadding),
 //                appBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.viewRightPadding),
                 appBar.heightAnchor.constraint(equalToConstant: appBarHeight),

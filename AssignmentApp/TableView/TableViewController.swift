@@ -10,48 +10,29 @@ import UIKit
 
 
 class TableViewController:UIViewController,UITableViewDataSource,UITableViewDelegate{
-   
+    
     private var storeItems:ItemsList!
     private var viewModel: StoreViewModel = StoreViewModel.instance
     private var loader = LoaderView()
     private var tableView = UITableView()
     private var appBar = AppBarView()
     private var stackView = UIStackView()
- 
-    func configureStackView(){
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.alignment = .leading
-        stackView.distribution = .fill
-        stackView.spacing = 20
-
-        appBar.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        let views = [ appBar, tableView]
-        for view in views {
-            stackView.addArrangedSubview(view)
-        }
-        view.addSubview(stackView)
-    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        loader = LoaderView()
-        loader = LoaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-
         Task{
             await  loadStoreData()
         }
     }
+    
     override func viewDidLayoutSubviews() {
-        view.addSubview(loader)
         setTableValues()
-        configureStackView()
+        setupStackView()
         addConstraints()
-        
-        
     }
+    
     func setTableValues()  {
         tableView.dataSource = self
         tableView.delegate = self
@@ -61,22 +42,29 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         tableView.frame = .zero
     }
     
-    
+    func setupStackView(){
+        loader.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .leading
+        stackView.distribution = .fill
+        stackView.spacing = 20
+        appBar.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        let views = [ appBar, tableView]
+        for view in views {
+            stackView.addArrangedSubview(view)
+        }
+        view.addSubview(stackView)
+    }
     
     
     func addConstraints()  {
         appBar.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-    
-        
         let appBarTop = NSLayoutConstraint(item: appBar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-        let tableTop = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: appBar, attribute: .bottom, multiplier: 1, constant: 20)
         let appBarLeading = NSLayoutConstraint(item: appBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
         let appBarTrailing = NSLayoutConstraint(item: appBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
-        let tableBottom = NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 150)
-        let appBarBottom = NSLayoutConstraint(item: appBar, attribute: .bottom, relatedBy: .equal, toItem: tableView, attribute: .top, multiplier: 1, constant: 0)
-        
         let tableLeading = NSLayoutConstraint(item: tableView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
         let tableTrailing = NSLayoutConstraint(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
         let tableHeight = NSLayoutConstraint(item: tableView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.height)
@@ -85,27 +73,22 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         
         NSLayoutConstraint.activate(
             [
-                
                 tableLeading, tableTrailing,
                 appBarTop,
-//                                appBarBottom,
-
-//                tableTop,
                 tableHeight,
                 appBarLeading, appBarTrailing,
-                appBarHeight
-                
+                appBarHeight,
             ]
         )
-        
     }
     
     func loadStoreData()async{
-//        parent?.view.
-        loader.startLoading(view: view)
+        
+        loader.startLoading(view: self.view)
         await viewModel.getStoreDetails()
         storeItems=(viewModel.store.response?.data)!
-        loader.stopLoading(view: view)
+        loader.stopLoading(view: self.view)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
