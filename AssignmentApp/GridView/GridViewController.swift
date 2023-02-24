@@ -19,45 +19,10 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         appBar.translatesAutoresizingMaskIntoConstraints = false
-        
-        setupCollecctionView()
+        setupCollectionView()
         setupStackView()
-        
-       
-       
-      
-       
-       
-        let appBarTop = NSLayoutConstraint(item: appBar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-        let tableTop = NSLayoutConstraint(item: collectionView, attribute: .top, relatedBy: .equal, toItem: appBar, attribute: .bottom, multiplier: 1, constant: 20)
-        let appBarLeading = NSLayoutConstraint(item: appBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
-        let appBarTrailing = NSLayoutConstraint(item: appBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
-        let tableBottom = NSLayoutConstraint(item: collectionView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 150)
-        let appBarBottom = NSLayoutConstraint(item: appBar, attribute: .bottom, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
-        
-        let tableLeading = NSLayoutConstraint(item: collectionView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
-        let tableTrailing = NSLayoutConstraint(item: collectionView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
-        let tableHeight = NSLayoutConstraint(item: collectionView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.height)
-        let appBarHeight = NSLayoutConstraint(item: appBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: appBar.appBarHeight)
-        
-        
-        NSLayoutConstraint.activate(
-            [
-                
-                tableLeading, tableTrailing,
-                appBarTop,
-               
-                tableHeight,
-                appBarLeading, appBarTrailing,
-                appBarHeight
-                
-            ]
-        )
-        
-        
-        
+        addConstraints()
     }
     
     func setupStackView(){
@@ -72,7 +37,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         view.addSubview(stackView)
     }
-    func setupCollecctionView( ){
+    func setupCollectionView( ){
         collectionView.frame = view.bounds
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         storeItems = viewModel.store.response?.data
@@ -80,6 +45,26 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.delegate = self
         collectionView.register(GridCell.self, forCellWithReuseIdentifier: GridCell.identifier)
     }
+    
+    func addConstraints(){
+        let appBarTop = NSLayoutConstraint(item: appBar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
+        let appBarLeading = NSLayoutConstraint(item: appBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+        let appBarTrailing = NSLayoutConstraint(item: appBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
+        let tableLeading = NSLayoutConstraint(item: collectionView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+        let tableTrailing = NSLayoutConstraint(item: collectionView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
+        let tableHeight = NSLayoutConstraint(item: collectionView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.height)
+        let appBarHeight = NSLayoutConstraint(item: appBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: appBar.appBarHeight)
+        NSLayoutConstraint.activate(
+            [
+                tableLeading, tableTrailing,
+                appBarTop,
+                tableHeight,
+                appBarLeading, appBarTrailing,
+                appBarHeight
+            ]
+        )
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.store.response?.data.items.count ?? 0
     }
