@@ -30,6 +30,7 @@ class ApiService{
                     continuation.resume(returning: self.storeData)
                 }
             })}
+        
         return self.storeData
     }
     

@@ -9,10 +9,11 @@ import UIKit
 
 class DashboardViewController: UITabBarController {
     private var tableView=UITableView()
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        view.addSubview(HeaderViewController().view)
+                
         createBottomNavBar()
     }
     

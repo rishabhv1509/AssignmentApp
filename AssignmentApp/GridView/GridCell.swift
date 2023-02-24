@@ -16,17 +16,19 @@ class GridCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(thumbnailImage)
+//        addSubview(thumbnailImage)
         addSubview(title)
-        addSubview(subTitle)
-        _ = GridConstraints(thumbnailImage: thumbnailImage, title: title, subTitle: subTitle, view: self)
+//        addSubview(subTitle)
+//        _ = GridConstraints(thumbnailImage: thumbnailImage, title: title, subTitle: subTitle, view: self)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configureThumbnailImage(image: String?){
+     func configureThumbnailImage(image: String?){
         thumbnailImage.layer.cornerRadius = Constants.imageRadius
+        thumbnailImage.contentMode = .scaleAspectFit
+        thumbnailImage.clipsToBounds = true
         downloadImage(from: URL(string:image!)!)
     }
     
@@ -50,6 +52,7 @@ class GridCell: UICollectionViewCell {
         self.title.textColor=Colors.titleColor
         self.title.adjustsFontSizeToFitWidth = true
         self.title.font=UIFont(name: Constants.interBold, size: Constants.titleSize)
+        self.title.clipsToBounds = true
     }
     
     func configuresubTitle(subTitle:String){
@@ -57,6 +60,7 @@ class GridCell: UICollectionViewCell {
         self.subTitle.textColor=Colors.subtitleColor
         self.subTitle.adjustsFontSizeToFitWidth = true
         self.subTitle.font=UIFont(name: Constants.interRegular, size: Constants.subTitleSize)
+        self.subTitle.clipsToBounds = true
     }
     
 }

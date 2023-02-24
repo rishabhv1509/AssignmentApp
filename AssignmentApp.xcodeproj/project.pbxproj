@@ -42,6 +42,9 @@
 		18659C7629A609F1003DDB0F /* TableCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C7529A609F1003DDB0F /* TableCellConstraints.swift */; };
 		18659C7829A61D65003DDB0F /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C7729A61D65003DDB0F /* GridCell.swift */; };
 		18659C7D29A624DF003DDB0F /* GridCellConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C7C29A624DF003DDB0F /* GridCellConstraints.swift */; };
+		18659C8029A75AE6003DDB0F /* AppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C7F29A75AE6003DDB0F /* AppBar.swift */; };
+		18659C8229A765FC003DDB0F /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C8129A765FC003DDB0F /* Strings.swift */; };
+		18659C8429A80E9D003DDB0F /* Sw-Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18659C8329A80E9D003DDB0F /* Sw-Inter-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +104,9 @@
 		18659C7529A609F1003DDB0F /* TableCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellConstraints.swift; sourceTree = "<group>"; };
 		18659C7729A61D65003DDB0F /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		18659C7C29A624DF003DDB0F /* GridCellConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellConstraints.swift; sourceTree = "<group>"; };
+		18659C7F29A75AE6003DDB0F /* AppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBar.swift; sourceTree = "<group>"; };
+		18659C8129A765FC003DDB0F /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		18659C8329A80E9D003DDB0F /* Sw-Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sw-Inter-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,7 @@
 		1840C6B2299A95A40090EEE1 /* AssignmentApp */ = {
 			isa = PBXGroup;
 			children = (
+				18659C7E29A75AC5003DDB0F /* AppBar */,
 				18659C6829A4F361003DDB0F /* Fonts */,
 				18659C5E29A46BCB003DDB0F /* TableView */,
 				18659C5A29A46AC7003DDB0F /* Dashboard */,
@@ -295,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				18659C6629A4F336003DDB0F /* Sw-Inter-Regular.ttf */,
+				18659C8329A80E9D003DDB0F /* Sw-Inter-Medium.ttf */,
 				18659C6929A4F548003DDB0F /* Sw-Inter-Bold.ttf */,
 			);
 			path = Fonts;
@@ -313,6 +321,7 @@
 			children = (
 				18659C6F29A5F9CB003DDB0F /* Constants.swift */,
 				18659C7129A5FE23003DDB0F /* Colors.swift */,
+				18659C8129A765FC003DDB0F /* Strings.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -331,6 +340,14 @@
 				18659C7C29A624DF003DDB0F /* GridCellConstraints.swift */,
 			);
 			path = Constraints;
+			sourceTree = "<group>";
+		};
+		18659C7E29A75AC5003DDB0F /* AppBar */ = {
+			isa = PBXGroup;
+			children = (
+				18659C7F29A75AE6003DDB0F /* AppBar.swift */,
+			);
+			path = AppBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,6 +456,7 @@
 			files = (
 				1840C6C0299A95A60090EEE1 /* LaunchScreen.storyboard in Resources */,
 				18659C6A29A4F548003DDB0F /* Sw-Inter-Bold.ttf in Resources */,
+				18659C8429A80E9D003DDB0F /* Sw-Inter-Medium.ttf in Resources */,
 				1840C6BD299A95A60090EEE1 /* Assets.xcassets in Resources */,
 				18659C6729A4F336003DDB0F /* Sw-Inter-Regular.ttf in Resources */,
 				1840C6BB299A95A40090EEE1 /* Main.storyboard in Resources */,
@@ -488,9 +506,11 @@
 				18659C4C29A429AB003DDB0F /* DataWrapper.swift in Sources */,
 				18659C6029A46BF1003DDB0F /* TableViewController.swift in Sources */,
 				1840C6B4299A95A40090EEE1 /* AppDelegate.swift in Sources */,
+				18659C8229A765FC003DDB0F /* Strings.swift in Sources */,
 				18659C4229A3CA3D003DDB0F /* ErrorEnums.swift in Sources */,
 				18541B55299F2FC600D3B959 /* ItemModel.swift in Sources */,
 				18659C6329A49EF8003DDB0F /* LoaderView.swift in Sources */,
+				18659C8029A75AE6003DDB0F /* AppBar.swift in Sources */,
 				18659C4F29A429F3003DDB0F /* StoreRepository.swift in Sources */,
 				1840C6B6299A95A40090EEE1 /* SceneDelegate.swift in Sources */,
 			);

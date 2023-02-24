@@ -9,44 +9,46 @@ import Foundation
 import UIKit
 
 class GridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+    
     private var collectionView: UICollectionView!
     private var viewModel: StoreViewModel = StoreViewModel.instance
     private var storeItems:ItemsList!
-
+    
     override func viewDidLoad() {
-        print("in here")
+        
         super.viewDidLoad()
+        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.frame = view.bounds
         storeItems = viewModel.store.response?.data
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(GridCell.self, forCellWithReuseIdentifier: GridCell.identifier)
-//        collectionView.contentSize = CGSize(width: 100, height: 100)
+        collectionView.contentSize = CGSize(width: 100, height: 100)
         view.addSubview(collectionView)
-//        self.collectionView.frame = CGRect(x: 0, y: 180, width: self.view.frame.size.width, height: self.view.frame.size.height - 180)
         
-        // Add constraints to the collection view
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                     collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                                     collectionView.widthAnchor.constraint(equalTo: view.widthAnchor),
-                                     collectionView.heightAnchor.constraint(equalTo: view.heightAnchor),
-//                                     collectionView.topAnchor.constraint(equalTo: appBarView!.bottomAnchor,constant: -10),
-//                                     collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -10),
-//                                     collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//                                     collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-                                    ])
-//        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -Constants.viewLeftPadding).isActive = true
-//        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
-
+    
+    func layoutw()->UICollectionViewCompositionalLayout{
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1/2),
+            heightDimension: .fractionalWidth (1/2)))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(2/5)),
+            subitem: item,
+            count: 1)
+        
+        let sections = NSCollectionLayoutSection(group: group)
+        print("in here")
+        return UICollectionViewCompositionalLayout(section: sections)
+        
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.store.response?.data.items.count ?? 0
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GridCell.identifier, for: indexPath) as! GridCell
         let item = storeItems.items[indexPath.row]
@@ -55,8 +57,21 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         cell.configureThumbnailImage(image: item.image)
         return cell
     }
-
+   
+    //MARK: Building the width and height of the collection view layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: (view.frame.size.width/3)-3, height: (view.frame.size.width/3)-3)
-        }
+        return CGSize(width: (view.frame.size.width/3)-3, height: (view.frame.size.width/3)-3)
+    }
+    
+    
+    //MARK: Setting the inter item spacing between the cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    //MARK: Setting the line spacing for the section
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 32
+    }
+    
 }

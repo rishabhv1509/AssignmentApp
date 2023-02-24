@@ -21,13 +21,18 @@ struct Constants{
     static let imageRadius = 8.0
     static let imageTopPadding = 40.0
     static let thumbnailImageSize = 110.0
+    static let explorePadding = viewLeftPadding + 16
     
     // MARK: Size Constants
     static let titleSize = 14.0
     static let subTitleSize = 14.0
     static let dividerHeight = 1.0
+    static let exploreSize = 18.0
+    static let filterSize = 16.0
+    static let searchSize = 16.0
     
     // MARK: Font Name Constants
     static let interRegular = "Inter-Regular"
     static let interBold = "Inter-Bold"
+    static let interMedium = "Inter-Medium"
 }
