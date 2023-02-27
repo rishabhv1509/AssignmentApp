@@ -47,7 +47,6 @@
 		18659C8429A80E9D003DDB0F /* Sw-Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18659C8329A80E9D003DDB0F /* Sw-Inter-Medium.ttf */; };
 		18659C8629A9443B003DDB0F /* TableViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C8529A9443B003DDB0F /* TableViewConstraints.swift */; };
 		18659C8829A95405003DDB0F /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C8729A95405003DDB0F /* TableView.swift */; };
-		18C059B829AB836E008430C2 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C059B729AB836E008430C2 /* TabBar.swift */; };
 		18C059BA29ABCAE4008430C2 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C059B929ABCAE4008430C2 /* HomePageController.swift */; };
 /* End PBXBuildFile section */
 
@@ -113,7 +112,6 @@
 		18659C8329A80E9D003DDB0F /* Sw-Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sw-Inter-Medium.ttf"; sourceTree = "<group>"; };
 		18659C8529A9443B003DDB0F /* TableViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewConstraints.swift; sourceTree = "<group>"; };
 		18659C8729A95405003DDB0F /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
-		18C059B729AB836E008430C2 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		18C059B929ABCAE4008430C2 /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,7 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				1840C6B7299A95A40090EEE1 /* DashboardController.swift */,
-				18C059B729AB836E008430C2 /* TabBar.swift */,
 				18C059B929ABCAE4008430C2 /* HomePageController.swift */,
 			);
 			path = View;
@@ -507,7 +504,6 @@
 				1840C6B8299A95A40090EEE1 /* DashboardController.swift in Sources */,
 				18659C6529A4A899003DDB0F /* TableCell.swift in Sources */,
 				18659C6D29A4F802003DDB0F /* CommonExtensions.swift in Sources */,
-				18C059B829AB836E008430C2 /* TabBar.swift in Sources */,
 				18541B63299F523A00D3B959 /* NetworkClient.swift in Sources */,
 				18659C4C29A429AB003DDB0F /* DataWrapper.swift in Sources */,
 				18659C6029A46BF1003DDB0F /* TableViewController.swift in Sources */,

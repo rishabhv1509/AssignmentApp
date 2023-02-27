@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
-class GridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class GridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var viewModel: StoreViewModel = StoreViewModel.instance
     private var storeItems:ItemsList!
+    private var baseItems:ItemsList!
     private var appBar = AppBarView()
     private var stackView = UIStackView()
     
@@ -20,9 +21,13 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         super.viewDidLoad()
         appBar.translatesAutoresizingMaskIntoConstraints = false
+        appBar.searchBar.delegate = self
         setupCollectionView()
         setupStackView()
         addConstraints()
+        Task{
+            await loadStoreData()
+        }
     }
     
     func setupStackView(){
@@ -50,17 +55,15 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         let appBarTop = NSLayoutConstraint(item: appBar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
         let appBarLeading = NSLayoutConstraint(item: appBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
         let appBarTrailing = NSLayoutConstraint(item: appBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
-        let tableLeading = NSLayoutConstraint(item: collectionView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
-        let tableTrailing = NSLayoutConstraint(item: collectionView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
-        let tableHeight = NSLayoutConstraint(item: collectionView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.height)
+        let gridLeading = NSLayoutConstraint(item: collectionView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+        let gridTrailing = NSLayoutConstraint(item: collectionView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
         let appBarHeight = NSLayoutConstraint(item: appBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: appBar.appBarHeight)
         let tableBottom = NSLayoutConstraint(item: collectionView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -100)
 
         NSLayoutConstraint.activate(
             [
-                tableLeading, tableTrailing,
+                gridLeading, gridTrailing,
                 appBarTop,
-//                tableHeight,
                 tableBottom,
                 appBarLeading, appBarTrailing,
                 appBarHeight
@@ -69,7 +72,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.store.response?.data.items.count ?? 0
+        return storeItems.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -97,4 +100,40 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         return 32
     }
     
+    
+    func search(forText: String){
+        
+        storeItems.items = storeItems.items.filter { item in
+            item.name.lowercased().contains(forText.lowercased())
+        }
+        collectionView.reloadData()
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if(searchText.isEmpty){
+            storeItems = baseItems
+            collectionView.reloadData()
+        }else{
+            search(forText: searchText)}
+        
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        storeItems = baseItems
+        
+    }
+    private var loader = LoaderView()
+    
+    func loadStoreData()async{
+        
+        loader.startLoading(view: self.view)
+        await viewModel.getStoreDetails()
+        storeItems = (viewModel.store.response?.data)!
+        baseItems = storeItems
+        loader.stopLoading(view: self.view)
+        
+    }
 }
