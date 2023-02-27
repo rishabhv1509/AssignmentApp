@@ -29,6 +29,10 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         }
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .all
+    }
+    
     override func viewDidLayoutSubviews() {
         setTableValues()
         setupStackView()
@@ -65,7 +69,6 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
     func addConstraints()  {
         appBar.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        let dashBoardController = DashboardViewController()
         let appBarTop = NSLayoutConstraint(item: appBar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
         let appBarLeading = NSLayoutConstraint(item: appBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
         let appBarTrailing = NSLayoutConstraint(item: appBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)

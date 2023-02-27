@@ -17,6 +17,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     private var appBar = AppBarView()
     private var stackView = UIStackView()
     
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -28,6 +29,10 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         Task{
             await loadStoreData()
         }
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .all
     }
     
     func setupStackView(){
