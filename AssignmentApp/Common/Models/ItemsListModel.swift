@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - ItemsList
 struct ItemsList:BaseModel ,Codable {
-    let items: [Item]
+    var items: [Item]
 }
 
 // MARK: DataClass convenience initializers and mutators

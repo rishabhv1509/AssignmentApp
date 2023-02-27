@@ -30,3 +30,18 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
+
+//extension DashboardViewController: UITabBarControllerDelegate {
+//    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//        // Handle tab selection
+//    }
+//}
+
+extension UIView {
+    func addTopBorder(withColor color: UIColor, thickness: CGFloat) {
+        let border = CALayer()
+        border.backgroundColor = color.cgColor
+        border.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: thickness)
+        self.layer.addSublayer(border)
+    }
+}

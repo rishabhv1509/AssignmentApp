@@ -54,11 +54,14 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         let tableTrailing = NSLayoutConstraint(item: collectionView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
         let tableHeight = NSLayoutConstraint(item: collectionView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.height)
         let appBarHeight = NSLayoutConstraint(item: appBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: appBar.appBarHeight)
+        let tableBottom = NSLayoutConstraint(item: collectionView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -100)
+
         NSLayoutConstraint.activate(
             [
                 tableLeading, tableTrailing,
                 appBarTop,
-                tableHeight,
+//                tableHeight,
+                tableBottom,
                 appBarLeading, appBarTrailing,
                 appBarHeight
             ]

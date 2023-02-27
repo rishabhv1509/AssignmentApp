@@ -3,4 +3,70 @@
    uuid = "777980D4-D670-4D6D-99DF-DBE90B6A3F93"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0E8280B9-B74F-48C3-AE5B-6DA01933B82D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssignmentApp/TableView/TableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "addConstraints()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0E8280B9-B74F-48C3-AE5B-6DA01933B82D - 3857a36839fe10f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AssignmentApp.TableViewController.addConstraints() -&gt; ()"
+                  moduleName = "AssignmentApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rishabh/Desktop/AssignmentApp/AssignmentApp/TableView/TableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "924">
+               </Location>
+               <Location
+                  uuid = "0E8280B9-B74F-48C3-AE5B-6DA01933B82D - 3857a36839fe10f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AssignmentApp.TableViewController.addConstraints() -&gt; ()"
+                  moduleName = "AssignmentApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rishabh/Desktop/AssignmentApp/AssignmentApp/TableView/TableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "1056">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "027282CD-6AFD-4092-BC59-4F2F8F69F533"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AssignmentApp/Common/Views/AppBar.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "setupView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

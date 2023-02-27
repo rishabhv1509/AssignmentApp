@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class AppBarView: UIView {
+class AppBarView: UIView, UISearchBarDelegate {
     
-    private var searchBar = UISearchBar()
+     var searchBar = UISearchBar()
     private var exploreLabel = UILabel()
     private var filterLabel = UILabel()
     private var _appBarHeight : CGFloat = 0
@@ -35,10 +35,10 @@ class AppBarView: UIView {
     
     
     func setupView(){
-        let safeArea = safeAreaInsets
-        _appBarHeight = 160 + safeArea.top
+        _appBarHeight = 160.0
+        searchBar.delegate = self
         
-        let exploreTopPadding = 55 + safeArea.top
+        let exploreTopPadding = 55.0
         
         frame = CGRect(x: 0, y: 0, width: frame.width, height: appBarHeight)
         backgroundColor = UIColor.blue
@@ -116,5 +116,14 @@ class AppBarView: UIView {
         let searchTrailing = NSLayoutConstraint(item: searchBar, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -Constants.viewRightPadding)
         
         addConstraints([searchBarTop, searchLeading, searchHeight, searchTrailing])
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Handle text changes in the search bar
+        print("change---", searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // Handle search button click
     }
 }
