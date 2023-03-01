@@ -8,18 +8,20 @@
 import Foundation
 
 class StoreViewModel : ObservableObject, Repository {
-     var vmDelegate : StoreVMDelegate!
+    
+    var vmDelegate : StoreVMDelegate!
     var storeRepository : StoreRepository
     
     static let instance = StoreViewModel()
-     init(){
-         storeRepository = StoreRepository.instance
-         storeRepository.repositoryDelegate = self
-         
+    
+    init() {
+        
+        storeRepository = StoreRepository.instance
+        storeRepository.repositoryDelegate = self
     }
     
     func getStoreDetails()  {
-        print("111")
+        
         storeRepository.getStoreData()
     }
     

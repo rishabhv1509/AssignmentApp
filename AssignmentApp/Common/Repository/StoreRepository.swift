@@ -23,16 +23,11 @@ class StoreRepository : ApiDelegate , CoreDataDelegate {
         self.apiService.apiDelegate = self
     }
     
-    
-    
-    
     func getStoreData() {
         coreDataService.getDataFromDb()
-        
     }
     
     func fetchApiData(_ data: DataWrapper<BaseModel, LocalizedError>) {
-        
         let apiData = data.response as? StoreResponseModel
         coreDataService.saveDataInDb(items: (apiData?.data.items)!)
         getStoreData()
@@ -41,9 +36,7 @@ class StoreRepository : ApiDelegate , CoreDataDelegate {
     
     
     func fetchCoreData(_ data: DataWrapper<[Item], LocalizedError>) {
-        
         let coreData = data.response
-        
         if(coreData!.isEmpty){
             apiService.getStoreData()
         }

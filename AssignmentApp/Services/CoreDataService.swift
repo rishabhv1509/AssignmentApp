@@ -29,45 +29,37 @@ struct CoreDataService {
     func getDataFromDb(){
         
         var coreItemsList : [Item] = []
-        
         var storeData : DataWrapper<[Item], LocalizedError> = DataWrapper()
         
         do {
-            let result = try managedContext.fetch(CoreItem.fetchRequest())
             
-            if(!result.isEmpty){
+            let result = try managedContext.fetch(CoreItem.fetchRequest())
+            if(!result.isEmpty) {
                 
                 for item in result {
-                    
                     coreItemsList.append(try! Item(coreItem: item))
-                }}
+                }
+                
+            }
             storeData.response = coreItemsList
             coreDataDelegate.fetchCoreData(storeData)
-            
         } catch let error as NSError {
             storeData.error = error
             coreDataDelegate.fetchCoreData(storeData)
-            
         }
-        
-        
     }
     
     func saveDataInDb(items : [Item] ){
         do{
-        try managedContext.execute(NSBatchDeleteRequest(fetchRequest: CoreItem.fetchRequest()))
-            
-        for item in items {
-            let itemEntity = CoreItem(context: managedContext)
-            itemEntity.name = item.name
-            itemEntity.price = item.price
-            itemEntity.extra = item.extra
-            itemEntity.image = item.image
-            try  managedContext.save()
-        }
-        
-        
-            
+            try managedContext.execute(NSBatchDeleteRequest(fetchRequest: CoreItem.fetchRequest()))
+            for item in items {
+                let itemEntity = CoreItem(context: managedContext)
+                itemEntity.name = item.name
+                itemEntity.price = item.price
+                itemEntity.extra = item.extra
+                itemEntity.image = item.image
+                try  managedContext.save()
+            }
         }catch{
             print("Error while saving")
         }

@@ -8,7 +8,6 @@
 import Foundation
 
 protocol Repository : AnyObject {
-//    associatedtype Entity
     
     func fetchStoreDataFromRepo(_ data: [Item])
     
