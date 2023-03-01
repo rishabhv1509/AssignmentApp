@@ -13,6 +13,13 @@ import CoreData
 
 class DashboardViewController: UITabBarController, UITabBarControllerDelegate, PageViewControllerDelegate {
     
+    
+    let selectedColor = UIColor.green
+    
+    
+    let deselectedColor = UIColor.lightGray
+    
+    
     var tabBarImage = UIImage(named: "button.png")!
     
     override func viewDidLoad() {
@@ -21,7 +28,7 @@ class DashboardViewController: UITabBarController, UITabBarControllerDelegate, P
         self.view.backgroundColor = .white
         configureTabBar()
         selectPage(at: 0)
-//        CoreDataService().getDataFromDb()
+
        
     }
 
@@ -43,39 +50,48 @@ class DashboardViewController: UITabBarController, UITabBarControllerDelegate, P
         
         self.tabBar.addTopBorder(withColor: UIColor.init(hex: "#BDC5CD")!, thickness: 0.5)
         self.tabBar.barStyle = .default
-        self.tabBar.barTintColor = .white
-        self.tabBar.tintColor = .green
-        self.tabBar.unselectedItemTintColor = .lightGray
+//        self.tabBar.barTintColor = .white
+//        self.tabBar.tintColor = .green
+//        self.tabBar.unselectedItemTintColor = .lightGray
         self.tabBar.backgroundColor = .white
-        self.tabBar.isOpaque = true
+//        self.tabBar.isOpaque = true
         self.tabBar.insetsLayoutMarginsFromSafeArea =  true
     }
     
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        self.selectPage(at: viewController.view.tag)
+        return false
+    }
+    
+   
+    
     func createTabs() -> HomePage? {
         let tableView = TableViewController()
-        let tableTabItem = UITabBarItem( title: "", image: UIImage(named: "button.png"), selectedImage: UIImage(named: "button.png"))
-        tableView.tabBarItem = tableTabItem
+
         
         let collectionView = GridViewController()
-        let collectionTab = UITabBarItem(title: "", image: UIImage(named: "button.png"), selectedImage: UIImage(named: "button.png"))
-        collectionView.tabBarItem = collectionTab
+
         
      
         let tabThree = EmptyViewController()
-        let tabThreeItem = UITabBarItem(title: "", image: UIImage(named: "button.png"), selectedImage: UIImage(named: "button.png"))
-        tabThree.tabBarItem = tabThreeItem
+
         
         let tabFour = EmptyViewController()
-        let tabFourItem = UITabBarItem(title: "", image: UIImage(named: "button.png"), selectedImage: UIImage(named: "button.png"))
-        tabFour.tabBarItem = tabFourItem
+
         
         let tabFive = EmptyViewController()
-        let tabFiveItem = UITabBarItem(title: "", image: UIImage(named: "button.png"), selectedImage: UIImage(named: "button.png"))
-        tabFive.tabBarItem = tabFiveItem
+        
+        tableView.view.tag = 0
+        collectionView.view.tag = 1
+        tabThree.view.tag = 2
+        tabFour.view.tag = 3
+        tabFive.view.tag = 4
         
         let homepageController = HomePage()
         homepageController.pages = [tableView,collectionView,tabThree,tabFour,tabFive]
-  
+        homepageController.tabBarItem = tabbarItem()
+        homepageController.view.tag = 1
+        homepageController.swipeDelegate = self
         return homepageController
         }
     
@@ -91,22 +107,7 @@ class DashboardViewController: UITabBarController, UITabBarControllerDelegate, P
         self.handleTabbarItemChange(viewController: viewController)
     }
     
-    private func handleTabbarItemChange(viewController: UIViewController) {
-        guard let viewControllers = self.viewControllers else { return }
-        let selectedIndex = viewController.view.tag
-        self.tabBar.tintColor = .green
-        self.tabBar.unselectedItemTintColor = .gray
-        
-        for i in 0..<viewControllers.count {
-            let tabbarItem = viewControllers[i].tabBarItem
-            let tabbarImage = self.tabBar.selectedItem?.image
-            
-        }
-        
-        if selectedIndex == 1 {
-            viewControllers[selectedIndex].tabBarItem.selectedImage =  self.tabBar.selectedItem?.image!.withRenderingMode(.alwaysOriginal)
-        }
-    }
+    
     
     private func selectPage(at index: Int) {
         
@@ -126,6 +127,26 @@ class DashboardViewController: UITabBarController, UITabBarControllerDelegate, P
         let uiTabBarItem = UITabBarItem(title: nil, image: tabBarImage, selectedImage: nil)
         uiTabBarItem.imageInsets = UIEdgeInsets(top: 14.5, left: 0, bottom: -14.5, right: 0)
         return uiTabBarItem
+    }
+    
+    private func handleTabbarItemChange(viewController: UIViewController) {
+        guard let viewControllers = self.viewControllers else { return }
+        let selectedIndex = viewController.view.tag
+        self.tabBar.tintColor = selectedColor
+        self.tabBar.unselectedItemTintColor = deselectedColor
+        
+        for i in 0..<viewControllers.count {
+            let tabbarItem = viewControllers[i].tabBarItem
+            let tabbarImage = self.tabBarImage
+            tabbarItem?.selectedImage = tabbarImage.withRenderingMode(.alwaysTemplate)
+            tabbarItem?.image = tabbarImage.withRenderingMode(
+                i == selectedIndex ? .alwaysOriginal : .alwaysTemplate
+            )
+        }
+        
+        if selectedIndex == 1 {
+            viewControllers[selectedIndex].tabBarItem.selectedImage =  self.tabBarImage.withRenderingMode(.alwaysOriginal)
+        }
     }
     
 }

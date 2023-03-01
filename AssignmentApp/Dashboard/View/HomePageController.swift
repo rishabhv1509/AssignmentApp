@@ -21,6 +21,7 @@ class HomePage: UIPageViewController, UIPageViewControllerDataSource, UIPageView
     // List of pages for the swipe view
     
     var pages = [UIViewController]()
+    weak var swipeDelegate: PageViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,18 +45,22 @@ class HomePage: UIPageViewController, UIPageViewControllerDataSource, UIPageView
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: viewController) else { return nil }
-        if index == 0 { return nil }
+        guard let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
+        let previousIndex = viewControllerIndex - 1
+        guard previousIndex >= 0 else { return nil }
+        guard pages.count > previousIndex else { return nil }
         
-        return pages[index - 1]
+        return pages[previousIndex]
     }
     
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = pages.firstIndex(of: viewController) else { return nil }
-        if index == pages.count - 1 { return nil }
-        print("pages", pages)
-        return pages[index + 1]
+        guard let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
+        let nextIndex = viewControllerIndex + 1
+        guard nextIndex < pages.count else { return nil }
+        guard pages.count > nextIndex else { return nil }
+        
+        return pages[nextIndex]
     }
     
     private func direction(for index: Int) -> UIPageViewController.NavigationDirection {
