@@ -18,8 +18,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     private var baseItems:[Item] = []
     private var appBar = AppBarView()
     private var stackView = UIStackView()
-    private var loader = LoaderView()
-    var isLoading = false
+    
     
     override func viewDidLoad() {
         
@@ -30,29 +29,20 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         setupCollectionView()
         setupStackView()
         addConstraints()
-        test()
-        
+        viewModel.getStoreDetails()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
     }
     
-    func test()  {
-        isLoading = true
-        viewModel.getStoreDetails()
-        isLoading = false
-    }
-    
     func setupStackView(){
-        
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .leading
         stackView.distribution = .fill
         stackView.spacing = 20
         let views = [ appBar, collectionView]
-        
         for view in views {
             stackView.addArrangedSubview(view)
         }
@@ -141,9 +131,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
-    
     func fetchDataFromVm(_ data: [Item]) {
-        
         storeItems = data
         baseItems = storeItems
         DispatchQueue.global(qos: .background).async {
