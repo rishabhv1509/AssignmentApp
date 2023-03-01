@@ -16,10 +16,6 @@ struct NetworkClient{
     
     private let session = URLSession(configuration: .default)
     
-    var networkDelegate : NetworkDelegate!
-    
-    
-    
     /// get network response
     /// - Parameters:
     ///   - urlString: url of the api
@@ -28,13 +24,13 @@ struct NetworkClient{
         
         guard let url = URL(string: urlString) else {
             completion(.failure(.invalidURL))
-            self.networkDelegate.fetchNetworkResponse(.failure(.invalidURL))
+            
             return
         }
         
         session.dataTask(with: url) { data, response, error in
             if error != nil {
-                self.networkDelegate.fetchNetworkResponse(.failure(.invalidData))
+                
                  completion(.failure(.invalidData))
                 
                 return
@@ -46,28 +42,28 @@ struct NetworkClient{
                 switch httpResponse.statusCode {
                 case 200..<300:
                     if let data = data {
-                        self.networkDelegate.fetchNetworkResponse(.success(data))
+                       
                       completion(.success(data))
                        
                         return
                     } else {
-                        self.networkDelegate.fetchNetworkResponse(.failure(.invalidData))
+                        
                         completion(.failure(.invalidData))
                         
                         return
                     }
                 case 400..<500:
-                        self.networkDelegate.fetchNetworkResponse(.failure(.clientError))
+                        
                     completion(.failure(.clientError))
                         
                     return
                 case 500..<600:
-                        self.networkDelegate.fetchNetworkResponse(.failure(.serverError))
+                       
                         return
                     completion(.failure(.serverError))
                         
                 default:
-                        self.networkDelegate.fetchNetworkResponse(.failure(.unexpectedError))
+                        
                     completion((.failure(.unexpectedError)))
                        
                     return

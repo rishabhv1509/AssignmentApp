@@ -29,19 +29,18 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         appBar.searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
+//        setupStackView()
+        TableUtils(tableView: tableView, view: self.view, stackView: stackView, appBar: appBar).setTableValues()
+//        TableUtils(tableView: tableView).setTableValues()
+        TableUtils(tableView: tableView, view: self.view, stackView: stackView, appBar: appBar).setupStackView()
+        _ = TableViewConstraints(appBar: appBar, tableView: tableView, view: self.view)
         viewModel.fetchStoreData()
-        
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
     }
     
-    override func viewDidLayoutSubviews() {
-        setTableValues()
-        setupStackView()
-        addConstraints()
-    }
     
     func setTableValues()  {
        
@@ -68,27 +67,7 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         view.addSubview(stackView)
     }
 
-    func addConstraints()  {
-        appBar.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        let appBarTop = NSLayoutConstraint(item: appBar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-        let appBarLeading = NSLayoutConstraint(item: appBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
-        let appBarTrailing = NSLayoutConstraint(item: appBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
-        let tableLeading = NSLayoutConstraint(item: tableView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
-        let tableTrailing = NSLayoutConstraint(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
-        let appBarHeight = NSLayoutConstraint(item: appBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: appBar.appBarHeight)
-        let tableBottom = NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -100)
-        
-        NSLayoutConstraint.activate(
-            [
-                tableLeading, tableTrailing,
-                appBarTop,
-                tableBottom,
-                appBarLeading, appBarTrailing,
-                appBarHeight,
-            ]
-        )
-    }
+   
     
     func fetchDataFromVm(_ data: [Item]) {
         
@@ -151,9 +130,3 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
 
     }
 }
-
-
-                                                                                                                                                                                                                    
-                                                                                                                                                                                                                    
-                                                                                                                                                                                                                    
-                                                                                                                                                                                                                    
