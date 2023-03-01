@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DashboardViewController: UITabBarController, UITabBarControllerDelegate, PageViewControllerDelegate {
     
@@ -20,6 +21,8 @@ class DashboardViewController: UITabBarController, UITabBarControllerDelegate, P
         self.view.backgroundColor = .white
         configureTabBar()
         selectPage(at: 0)
+//        CoreDataService().getDataFromDb()
+       
     }
 
     func configureTabBar(){

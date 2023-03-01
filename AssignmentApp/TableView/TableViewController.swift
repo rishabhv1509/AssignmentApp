@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 
 class TableViewController:UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate{
@@ -89,10 +90,35 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     func loadStoreData()async{
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
         
+        let managedContext = appDelegate.persistentContainer.viewContext
         loader.startLoading(view: self.view)
         await viewModel.getStoreDetails()
         storeItems = (viewModel.store.response?.data)!
+
+        for item in storeItems.items{
+
+            let entity = NSEntityDescription.entity(forEntityName: "CoreItem", in: managedContext)!
+            let storeItem = NSManagedObject(entity: entity, insertInto: managedContext)
+            
+            storeItem.setValue(item.name, forKey: "name")
+            storeItem.setValue(item.price, forKey: "price")
+            storeItem.setValue(item.extra, forKey: "extra")
+            storeItem.setValue(item.image, forKey: "image")
+//            rt.append(testitems)
+            
+           
+        }
+
+        print(2222)
+        DispatchQueue.main.async {
+            Task{
+                await StoreRepository.instance.getStoreData()}
+        }
+      try!  managedContext.save()
         baseItems = storeItems
         loader.stopLoading(view: self.view)
         

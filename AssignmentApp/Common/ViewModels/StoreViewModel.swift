@@ -14,7 +14,7 @@ class StoreViewModel : ObservableObject {
     }
     @Published var store: DataWrapper<StoreResponseModel,LocalizedError> = DataWrapper()
     func getStoreDetails() async {
-        let result = await StoreRepository().getStoreData()
+        let result = await StoreRepository.instance.getStoreData1()
         if(result.error != nil) {
             self.store.error = result.error
         } else {
