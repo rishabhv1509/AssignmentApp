@@ -52,10 +52,11 @@
 		18A1320729AD20EA000F45ED /* CoreItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1320529AD20EA000F45ED /* CoreItem+CoreDataProperties.swift */; };
 		18A1320A29ADDF29000F45ED /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1320929ADDF29000F45ED /* CoreDataService.swift */; };
 		18A1320D29ADF5B8000F45ED /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1320C29ADF5B8000F45ED /* RepositoryProtocol.swift */; };
-		18A1320F29AE30AA000F45ED /* ViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1320E29AE30AA000F45ED /* ViewModelDelegate.swift */; };
 		18C059BA29ABCAE4008430C2 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C059B929ABCAE4008430C2 /* HomePageController.swift */; };
 		18E699B929AF47C30031D6F4 /* ApiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699B829AF47C30031D6F4 /* ApiDelegate.swift */; };
 		18E699BB29AF4E090031D6F4 /* NetworkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699BA29AF4E090031D6F4 /* NetworkDelegate.swift */; };
+		18E699BD29AF69360031D6F4 /* CoredataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699BC29AF69360031D6F4 /* CoredataDelegate.swift */; };
+		18E699C729AF99AC0031D6F4 /* StoreViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699C629AF99AC0031D6F4 /* StoreViewModelDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,10 +126,11 @@
 		18A1320529AD20EA000F45ED /* CoreItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreItem+CoreDataProperties.swift"; path = "AssignmentApp/Common/Models/CoreModels/CoreItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		18A1320929ADDF29000F45ED /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		18A1320C29ADF5B8000F45ED /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
-		18A1320E29AE30AA000F45ED /* ViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelDelegate.swift; sourceTree = "<group>"; };
 		18C059B929ABCAE4008430C2 /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		18E699B829AF47C30031D6F4 /* ApiDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDelegate.swift; sourceTree = "<group>"; };
 		18E699BA29AF4E090031D6F4 /* NetworkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDelegate.swift; sourceTree = "<group>"; };
+		18E699BC29AF69360031D6F4 /* CoredataDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataDelegate.swift; sourceTree = "<group>"; };
+		18E699C629AF99AC0031D6F4 /* StoreViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewModelDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,9 +394,10 @@
 			isa = PBXGroup;
 			children = (
 				18A1320C29ADF5B8000F45ED /* RepositoryProtocol.swift */,
-				18A1320E29AE30AA000F45ED /* ViewModelDelegate.swift */,
 				18E699B829AF47C30031D6F4 /* ApiDelegate.swift */,
 				18E699BA29AF4E090031D6F4 /* NetworkDelegate.swift */,
+				18E699BC29AF69360031D6F4 /* CoredataDelegate.swift */,
+				18E699C629AF99AC0031D6F4 /* StoreViewModelDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -536,13 +539,14 @@
 				18659C4029A3CA2E003DDB0F /* ResponseEnums.swift in Sources */,
 				18659C7229A5FE23003DDB0F /* Colors.swift in Sources */,
 				18A1320729AD20EA000F45ED /* CoreItem+CoreDataProperties.swift in Sources */,
+				18E699C729AF99AC0031D6F4 /* StoreViewModelDelegate.swift in Sources */,
 				18541B5C299F454E00D3B959 /* StoreModel.swift in Sources */,
 				18659C7629A609F1003DDB0F /* TableCellConstraints.swift in Sources */,
-				18A1320F29AE30AA000F45ED /* ViewModelDelegate.swift in Sources */,
 				18659C7D29A624DF003DDB0F /* GridCellConstraints.swift in Sources */,
 				18659C4629A40D8C003DDB0F /* ApiService.swift in Sources */,
 				18659C7029A5F9CB003DDB0F /* Constants.swift in Sources */,
 				18A1320629AD20EA000F45ED /* CoreItem+CoreDataClass.swift in Sources */,
+				18E699BD29AF69360031D6F4 /* CoredataDelegate.swift in Sources */,
 				18659C4829A40EA2003DDB0F /* BaseModel.swift in Sources */,
 				18659C8629A9443B003DDB0F /* TableViewConstraints.swift in Sources */,
 				18E699BB29AF4E090031D6F4 /* NetworkDelegate.swift in Sources */,

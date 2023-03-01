@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(CoreItem)
-public class CoreItem: NSManagedObject {
+public class CoreItem: NSManagedObject, BaseModel {
 
 }

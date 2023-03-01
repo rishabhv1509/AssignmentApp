@@ -10,6 +10,6 @@ import Foundation
 protocol Repository : AnyObject {
 //    associatedtype Entity
     
-    func getStoreData(_ data: [Item])
+    func fetchStoreDataFromRepo(_ data: [Item])
     
 }

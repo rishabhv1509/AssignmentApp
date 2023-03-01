@@ -8,40 +8,51 @@
 import Foundation
 import UIKit
 
-class GridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class GridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, StoreVMDelegate {
+  
+    
     
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var viewModel: StoreViewModel = StoreViewModel.instance
-    private var storeItems:ItemsList!
-    private var baseItems:ItemsList!
+    private var storeItems:[Item] = []
+    private var baseItems:[Item] = []
     private var appBar = AppBarView()
     private var stackView = UIStackView()
-    
+    private var loader = LoaderView()
+    var isLoading = false
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         appBar.translatesAutoresizingMaskIntoConstraints = false
         appBar.searchBar.delegate = self
+        viewModel.vmDelegate = self
         setupCollectionView()
         setupStackView()
         addConstraints()
-        Task{
-            await loadStoreData()
-        }
+        test()
+        
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
     }
     
+    func test()  {
+        isLoading = true
+        viewModel.getStoreDetails()
+        isLoading = false
+    }
+    
     func setupStackView(){
+        
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .leading
         stackView.distribution = .fill
         stackView.spacing = 20
         let views = [ appBar, collectionView]
+        
         for view in views {
             stackView.addArrangedSubview(view)
         }
@@ -50,7 +61,6 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     func setupCollectionView( ){
         collectionView.frame = view.bounds
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        storeItems = viewModel.store.response?.data
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(GridCell.self, forCellWithReuseIdentifier: GridCell.identifier)
@@ -77,12 +87,12 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return storeItems.items.count
+        return storeItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GridCell.identifier, for: indexPath) as! GridCell
-        let item = storeItems.items[indexPath.row]
+        let item = storeItems[indexPath.row]
         cell.configureTitle(title: item.name )
         cell.configuresubTitle(subTitle: item.price)
         cell.configureThumbnailImage(image: item.image)
@@ -108,7 +118,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func search(forText: String){
         
-        storeItems.items = storeItems.items.filter { item in
+        storeItems = storeItems.filter { item in
             item.name.lowercased().contains(forText.lowercased())
         }
         collectionView.reloadData()
@@ -130,15 +140,18 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         storeItems = baseItems
         
     }
-    private var loader = LoaderView()
     
-    func loadStoreData()async{
+    
+    func fetchDataFromVm(_ data: [Item]) {
         
-        loader.startLoading(view: self.view)
-        await viewModel.getStoreDetails()
-        storeItems = (viewModel.store.response?.data)!
+        storeItems = data
         baseItems = storeItems
-        loader.stopLoading(view: self.view)
+        DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
         
     }
+
 }

@@ -11,47 +11,67 @@ import CoreData
 
 
 struct CoreDataService {
+    
     static let instance = CoreDataService()
+    
     var appDelegate : AppDelegate
     var managedContext : NSManagedObjectContext
-    var  entity : NSEntityDescription
-    var  storeItem : NSManagedObject
+    
+    var coreDataDelegate : CoreDataDelegate!
+    
     
     init() {
-        
         appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         managedContext = appDelegate.persistentContainer.viewContext
-        entity = NSEntityDescription.entity(forEntityName: "CoreItem", in: managedContext)!
-        storeItem = NSManagedObject(entity: entity, insertInto: managedContext)
-        
     }
- 
     
-    func getDataFromDb()->[CoreItem]{
-        var result : [CoreItem] = []
+    
+    func getDataFromDb(){
+        
+        var coreItemsList : [Item] = []
+        
+        var storeData : DataWrapper<[Item], LocalizedError> = DataWrapper()
+        
         do {
-             result = try managedContext.fetch(CoreItem.fetchRequest())
+            let result = try managedContext.fetch(CoreItem.fetchRequest())
+            
+            if(!result.isEmpty){
+                
+                for item in result {
+                    
+                    coreItemsList.append(try! Item(coreItem: item))
+                }}
+            storeData.response = coreItemsList
+            coreDataDelegate.fetchCoreData(storeData)
+            
         } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+            storeData.error = error
+            coreDataDelegate.fetchCoreData(storeData)
+            
         }
-        return result
+        
+        
     }
     
     func saveDataInDb(items : [Item] ){
-
-        for item in items {
-            storeItem.setValue(item.name, forKey: "name")
-            storeItem.setValue(item.price, forKey: "price")
-            storeItem.setValue(item.extra, forKey: "extra")
-            storeItem.setValue(item.image, forKey: "image")
-        }
-         
         do{
+        try managedContext.execute(NSBatchDeleteRequest(fetchRequest: CoreItem.fetchRequest()))
+            
+        for item in items {
+            let itemEntity = CoreItem(context: managedContext)
+            itemEntity.name = item.name
+            itemEntity.price = item.price
+            itemEntity.extra = item.extra
+            itemEntity.image = item.image
             try  managedContext.save()
+        }
+        
+        
+            
         }catch{
             print("Error while saving")
         }
     }
     
-  
+    
 }

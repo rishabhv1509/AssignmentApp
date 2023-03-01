@@ -17,12 +17,20 @@ class LoaderView: UIView {
         super.init(frame: frame)
         print("frame---", frame)
         loader = UIActivityIndicatorView(frame: frame)
-        loader.style = .large
         
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+//        loader.frame =
+        loader = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
+        loader.style = .large
+//        loader.style = .large
+
     }
     
     //This method starts the loader on the screen

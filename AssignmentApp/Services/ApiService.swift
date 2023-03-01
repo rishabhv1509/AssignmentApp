@@ -7,31 +7,97 @@
 
 import Foundation
 
-class ApiService{
-    var storeData : DataWrapper<BaseModel, LocalizedError> = DataWrapper()
+class ApiService : NetworkDelegate {
     
-    func getStoreData()async->DataWrapper<BaseModel, LocalizedError>{
+    var apiDelegate : ApiDelegate!
+    
+    
+    
+    var networkClient : NetworkClient
+    init( networkClient: NetworkClient) {
         
-        _ = try! await withUnsafeThrowingContinuation { continuation in
+        self.networkClient = networkClient
+        self.networkClient.networkDelegate = self
+    }
+    func getStoreData(){
+        var storeData : DataWrapper<BaseModel, LocalizedError> = DataWrapper()
+//        _ = try! await withUnsafeThrowingContinuation { continuation in
             
-            NetworkClient.instance.getResponse(urlString: Urls.getStoreData, completion: { data in
+            self.networkClient.getResponse(urlString: Urls.getStoreData, completion: { data in
                 switch data {
                 case .success(let response):
                     do{
-                        self.storeData.response=try StoreResponseModel(data: response)
-                        continuation.resume(returning: self.storeData)
+//                        print("inhere-----")
+                       storeData.response = try StoreResponseModel(data: response)
+                        
+//                        continuation.resume(returning: self.storeData)
                     }
                     catch{
-                        self.storeData.error=DecodingErrors.decodeError
-                        continuation.resume(returning: self.storeData)
+                        storeData.error=DecodingErrors.decodeError
+//                        continuation.resume(returning: self.storeData)
                     }
                 case .failure(let networkError):
-                    self.storeData.error=networkError
-                    continuation.resume(returning: self.storeData)
+                    storeData.error=networkError
+//                    continuation.resume(returning: self.storeData)
                 }
-            })}
+                self.apiDelegate?.fetchApiData(storeData)
+            })
+//
+//    }
         
-        return self.storeData
+//        return DataWrapper()
+    }
+    
+    func getStoreDataCOMMENT()async->DataWrapper<BaseModel, LocalizedError>{
+        var storeData : DataWrapper<BaseModel, LocalizedError> = DataWrapper()
+        //        _ = try! await withUnsafeThrowingContinuation { continuation in
+        
+        self.networkClient.getResponse(urlString: Urls.getStoreData, completion: { data in
+            switch data {
+                case .success(let response):
+                    do{
+                        //                        print("inhere-----")
+                        storeData.response = try StoreResponseModel(data: response)
+                        
+                        //                        continuation.resume(returning: self.storeData)
+                    }
+                    catch{
+                        storeData.error=DecodingErrors.decodeError
+                        //                        continuation.resume(returning: self.storeData)
+                    }
+                case .failure(let networkError):
+                    storeData.error=networkError
+                    //                    continuation.resume(returning: self.storeData)
+            }
+        })
+        //
+        //    }
+        
+        return DataWrapper()
+    }
+    
+    func fetchNetworkResponse(_ response: ApiResponse<Data, NetworkError>) {
+        var storeData : DataWrapper<BaseModel, LocalizedError> = DataWrapper()
+        
+        switch response {
+            case .success(let data):
+                do{
+                    
+                    storeData.response = try StoreResponseModel(data: data)
+                    
+                    
+                }
+                catch{
+                    storeData.error=DecodingErrors.decodeError
+                    
+                }
+            case .failure(let networkError):
+                
+                storeData.error=networkError
+                
+        }
+        apiDelegate?.fetchApiData(storeData)
+        
     }
     
 }

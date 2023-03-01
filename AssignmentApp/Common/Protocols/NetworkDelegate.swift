@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NetworkDelegate : AnyObject {
-    func getApiResponse(_ response: ApiResponse<Data,NetworkError>)
+    func fetchNetworkResponse(_ response: ApiResponse<Data,NetworkError>)
 }

@@ -7,18 +7,24 @@
 
 import Foundation
 
-class StoreViewModel : ObservableObject {
+class StoreViewModel : ObservableObject, Repository {
+     var vmDelegate : StoreVMDelegate!
+    var storeRepository : StoreRepository
+    
     static let instance = StoreViewModel()
      init(){
-        
+         storeRepository = StoreRepository.instance
+         storeRepository.repositoryDelegate = self
+         
     }
-    @Published var store: DataWrapper<StoreResponseModel,LocalizedError> = DataWrapper()
-    func getStoreDetails() async {
-        let result = await StoreRepository.instance.getStoreData1()
-        if(result.error != nil) {
-            self.store.error = result.error
-        } else {
-            self.store.response = result.response
-        }
+    
+    func getStoreDetails()  {
+        print("111")
+        storeRepository.getStoreData()
+    }
+    
+    func fetchStoreDataFromRepo(_ data: [Item]) {
+        vmDelegate.fetchDataFromVm(data)
+        
     }
 }

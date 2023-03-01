@@ -21,6 +21,13 @@ extension Item {
         self = try newJSONDecoder().decode(Item.self, from: data)
     }
     
+    init(coreItem : CoreItem) throws {
+        self.name = coreItem.name ?? ""
+        self.price = coreItem.price ?? ""
+        self.image = coreItem.image ?? ""
+        self.extra = coreItem.extra ?? ""
+    }
+    
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
             throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)

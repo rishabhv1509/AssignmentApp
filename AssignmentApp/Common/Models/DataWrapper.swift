@@ -8,6 +8,7 @@
 import Foundation
 
 struct DataWrapper<BaseModel,NetworkError> {
+    
     var response: BaseModel?
     var error: LocalizedError?
     var isLoading: Bool=false

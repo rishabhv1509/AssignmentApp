@@ -10,24 +10,27 @@ import UIKit
 import CoreData
 
 
-class TableViewController:UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate{
-    
-    private var storeItems:ItemsList!
-    private var baseItems:ItemsList!
+class TableViewController:UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate, StoreVMDelegate{
+
+    private var baseItems : [Item] = []
     private var viewModel: StoreViewModel = StoreViewModel.instance
     private var loader = LoaderView()
     private var tableView = UITableView()
     private var appBar = AppBarView()
     private var stackView = UIStackView()
+    private var storeItems : [Item] = []
+    var isLoading = false
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.vmDelegate = self
         appBar.searchBar.delegate = self
-        Task{
-            await  loadStoreData()
-        }
+        tableView.dataSource = self
+        tableView.delegate = self
+        viewModel.getStoreDetails()
+        
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -41,8 +44,7 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     func setTableValues()  {
-        tableView.dataSource = self
-        tableView.delegate = self
+       
         tableView.register(TableCell.self, forCellReuseIdentifier: TableCell.identifier)
         tableView.showsVerticalScrollIndicator = true
         tableView.rowHeight = 80
@@ -65,8 +67,7 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         }
         view.addSubview(stackView)
     }
-    
-    
+
     func addConstraints()  {
         appBar.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,43 +90,20 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         )
     }
     
-    func loadStoreData()async{
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
+    func fetchDataFromVm(_ data: [Item]) {
         
-        let managedContext = appDelegate.persistentContainer.viewContext
-        loader.startLoading(view: self.view)
-        await viewModel.getStoreDetails()
-        storeItems = (viewModel.store.response?.data)!
-
-        for item in storeItems.items{
-
-            let entity = NSEntityDescription.entity(forEntityName: "CoreItem", in: managedContext)!
-            let storeItem = NSManagedObject(entity: entity, insertInto: managedContext)
-            
-            storeItem.setValue(item.name, forKey: "name")
-            storeItem.setValue(item.price, forKey: "price")
-            storeItem.setValue(item.extra, forKey: "extra")
-            storeItem.setValue(item.image, forKey: "image")
-//            rt.append(testitems)
-            
-           
-        }
-
-        print(2222)
-        DispatchQueue.main.async {
-            Task{
-                await StoreRepository.instance.getStoreData()}
-        }
-      try!  managedContext.save()
+        storeItems = data
         baseItems = storeItems
-        loader.stopLoading(view: self.view)
+        DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return   storeItems?.items.count ?? 0
+        return   storeItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -133,7 +111,7 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
 
         let cell = tableView.dequeueReusableCell(withIdentifier: TableCell.identifier, for: indexPath) as! TableCell
 
-        let item = storeItems.items[indexPath.row]
+        let item = storeItems[indexPath.row]
 
         cell.configureLeadingImage(image: item.image)
         cell.configureTitle(title: item.name )
@@ -150,7 +128,7 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
 
     func search(forText: String){
 
-        storeItems.items = storeItems.items.filter { item in
+        storeItems = storeItems.filter { item in
             item.name.lowercased().contains(forText.lowercased())
         }
         tableView.reloadData()

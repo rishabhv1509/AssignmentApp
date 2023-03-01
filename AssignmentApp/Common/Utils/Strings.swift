@@ -16,4 +16,5 @@ struct CommonStrings{
     static let price = "price"
     static let extra = "extra"
     static let image = "image"
+    static let listEntityName = "CoreItemList"
 }

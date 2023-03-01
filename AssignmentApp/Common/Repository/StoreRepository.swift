@@ -7,56 +7,54 @@
 
 import Foundation
 
-class StoreRepository  {
-//    func getStoreData(_ data: [Item]) {
-//        <#code#>
-//    }
+class StoreRepository : ApiDelegate , CoreDataDelegate {
     
-
     var apiService : ApiService
     var coreDataService : CoreDataService
-    weak var delegate : Repository!
+    weak var repositoryDelegate : Repository!
+    var storeItems : [Item] = []
     
-    static let instance = StoreRepository(apiService: ApiService(), coreDataService: CoreDataService())
+    static let instance = StoreRepository(apiService: ApiService(networkClient: NetworkClient.instance), coreDataService: CoreDataService())
     
     init(apiService : ApiService, coreDataService : CoreDataService) {
         self.apiService = apiService
         self.coreDataService = coreDataService
-        
+        self.coreDataService.coreDataDelegate = self
+        self.apiService.apiDelegate = self
+    }
+    
+    
+    
+    
+    func getStoreData() {
+        coreDataService.getDataFromDb()
         
     }
-    var storeItems : [Item] = []
     
-    typealias Entity = [Item]
-    
-    func getStoreData() async ->[Item] {
-        let dbData = self.coreDataService.getDataFromDb()
+    func fetchApiData(_ data: DataWrapper<BaseModel, LocalizedError>) {
         
-        if (dbData == []){
-            var test = await self.apiService.getStoreData()
-            print("test---")
-            if (test.error == nil ){
-                var t = test.response as? StoreResponseModel
-                storeItems = (t?.data.items)!
-            }
-        }else{
-            let storeData = await apiService.getStoreData()
-          var t = storeData.response as? StoreResponseModel
-            storeItems = (t?.data.items)!
-            delegate?.getStoreData(storeItems)
-            print("dbData---", dbData[0].name, "type of------", type(of: dbData))
-            
+        let apiData = data.response as? StoreResponseModel
+        coreDataService.saveDataInDb(items: (apiData?.data.items)!)
+        getStoreData()
+    }
+    
+    
+    
+    func fetchCoreData(_ data: DataWrapper<[Item], LocalizedError>) {
+        
+        let coreData = data.response
+        
+        if(coreData!.isEmpty){
+            apiService.getStoreData()
         }
-        return storeItems
+        else{
+            repositoryDelegate.fetchStoreDataFromRepo(coreData!)
+        }
     }
     
-    func getStoreData1()async->DataWrapper<StoreResponseModel,LocalizedError>{
-       let storeData = await ApiService().getStoreData()
-        return DataWrapper<StoreResponseModel,LocalizedError>(response: storeData.response as? StoreResponseModel, error: storeData.error)
-    }
+    
 }
 
 
-// isloading
-// is error
+
 
