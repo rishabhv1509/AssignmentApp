@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol StoreVMDelegate {
+protocol StoreVMDelegate : AnyObject {
     func fetchDataFromVm(_ storeData : [Item])
 }

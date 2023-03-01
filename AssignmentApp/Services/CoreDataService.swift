@@ -10,23 +10,26 @@ import UIKit
 import CoreData
 
 
+/// Service to fetch and save data from DB
 struct CoreDataService {
     
     static let instance = CoreDataService()
     
-    var appDelegate : AppDelegate
-    var managedContext : NSManagedObjectContext
+    private var appDelegate : AppDelegate
+    private var managedContext : NSManagedObjectContext
     
     var coreDataDelegate : CoreDataDelegate!
-    
     
     init() {
         appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         managedContext = appDelegate.persistentContainer.viewContext
     }
     
+ // TODO: Add errors as well to data wrapper
     
-    func getDataFromDb(){
+    
+    /// fetch data from DB
+    func fetchDataFromDb(){
         
         var coreItemsList : [Item] = []
         var storeData : DataWrapper<[Item], LocalizedError> = DataWrapper()
@@ -34,7 +37,7 @@ struct CoreDataService {
         do {
             
             let result = try managedContext.fetch(CoreItem.fetchRequest())
-            if(!result.isEmpty) {
+            if(!result.isEmpty){
                 
                 for item in result {
                     coreItemsList.append(try! Item(coreItem: item))
@@ -49,6 +52,8 @@ struct CoreDataService {
         }
     }
     
+    /// Save items in DB
+    /// - Parameter items: list of store items
     func saveDataInDb(items : [Item] ){
         do{
             try managedContext.execute(NSBatchDeleteRequest(fetchRequest: CoreItem.fetchRequest()))

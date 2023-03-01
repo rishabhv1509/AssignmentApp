@@ -29,7 +29,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         setupCollectionView()
         setupStackView()
         addConstraints()
-        viewModel.getStoreDetails()
+        viewModel.fetchStoreData()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

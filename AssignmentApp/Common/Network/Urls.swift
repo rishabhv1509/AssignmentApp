@@ -9,6 +9,7 @@
 import Foundation
 
 struct Urls {
+    
     // BaseUrl
     static let baseUrl = "https://run.mocky.io/"
     

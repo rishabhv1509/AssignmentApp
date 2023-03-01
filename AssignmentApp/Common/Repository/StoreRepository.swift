@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// Repository to handle db and api data
 class StoreRepository : ApiDelegate , CoreDataDelegate {
     
     var apiService : ApiService
@@ -14,7 +16,8 @@ class StoreRepository : ApiDelegate , CoreDataDelegate {
     weak var repositoryDelegate : Repository!
     var storeItems : [Item] = []
     
-    static let instance = StoreRepository(apiService: ApiService(networkClient: NetworkClient.instance), coreDataService: CoreDataService())
+    static let instance = StoreRepository(apiService: ApiService.instance, coreDataService: CoreDataService.instance)
+    
     
     init(apiService : ApiService, coreDataService : CoreDataService) {
         self.apiService = apiService
@@ -23,10 +26,15 @@ class StoreRepository : ApiDelegate , CoreDataDelegate {
         self.apiService.apiDelegate = self
     }
     
+    
+    /// get data for VM
     func getStoreData() {
-        coreDataService.getDataFromDb()
+        coreDataService.fetchDataFromDb()
     }
     
+    
+    /// delegate to fetch data from the api
+    /// - Parameter data: response coming from api
     func fetchApiData(_ data: DataWrapper<BaseModel, LocalizedError>) {
         let apiData = data.response as? StoreResponseModel
         coreDataService.saveDataInDb(items: (apiData?.data.items)!)
@@ -34,14 +42,15 @@ class StoreRepository : ApiDelegate , CoreDataDelegate {
     }
     
     
-    
+    /// delegate to fetch data from the internal db
+    /// - Parameter data: response coming from internal db
     func fetchCoreData(_ data: DataWrapper<[Item], LocalizedError>) {
         let coreData = data.response
         if(coreData!.isEmpty){
-            apiService.getStoreData()
+            apiService.fetchStoreData()
         }
         else{
-            repositoryDelegate.fetchStoreDataFromRepo(coreData!)
+            repositoryDelegate.fetchStoreDataFromRepository(coreData!)
         }
     }
     

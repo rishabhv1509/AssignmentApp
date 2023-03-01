@@ -29,7 +29,7 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
         appBar.searchBar.delegate = self
         tableView.dataSource = self
         tableView.delegate = self
-        viewModel.getStoreDetails()
+        viewModel.fetchStoreData()
         
     }
     

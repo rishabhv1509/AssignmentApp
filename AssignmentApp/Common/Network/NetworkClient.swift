@@ -12,12 +12,18 @@ struct NetworkClient{
     
     static let instance = NetworkClient()
     
-    private init(){}
+    init(){}
     
     private let session = URLSession(configuration: .default)
     
     var networkDelegate : NetworkDelegate!
     
+    
+    
+    /// get network response
+    /// - Parameters:
+    ///   - urlString: url of the api
+    ///   - completion: completion method to be executed when the network call is executed
     func getResponse(urlString: String, completion: @escaping (ApiResponse<Data,NetworkError >) -> Void) {
         
         guard let url = URL(string: urlString) else {
@@ -35,6 +41,8 @@ struct NetworkClient{
             }
             
             if let httpResponse = response as? HTTPURLResponse {
+                
+                /// switch response on different types of network codes and return data/error eccordingly
                 switch httpResponse.statusCode {
                 case 200..<300:
                     if let data = data {

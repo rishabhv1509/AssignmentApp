@@ -7,25 +7,32 @@
 
 import Foundation
 
-class StoreViewModel : ObservableObject, Repository {
+
+/// View Model to communicate b/w view and repository
+class StoreViewModel : Repository {
     
-    var vmDelegate : StoreVMDelegate!
+   
     var storeRepository : StoreRepository
+    weak var vmDelegate : StoreVMDelegate!
+    static let instance = StoreViewModel(storeRepository: StoreRepository.instance)
     
-    static let instance = StoreViewModel()
-    
-    init() {
+    init( storeRepository: StoreRepository) {
         
-        storeRepository = StoreRepository.instance
-        storeRepository.repositoryDelegate = self
+        self.storeRepository = storeRepository
+        self.storeRepository.repositoryDelegate = self
     }
+
     
-    func getStoreDetails()  {
+    /// fetch data from repository
+    func fetchStoreData()  {
         
         storeRepository.getStoreData()
     }
     
-    func fetchStoreDataFromRepo(_ data: [Item]) {
+    
+    /// delegate method to pass data to view
+    /// - Parameter data: list of store items
+    func fetchStoreDataFromRepository(_ data: [Item]) {
         vmDelegate.fetchDataFromVm(data)
         
     }

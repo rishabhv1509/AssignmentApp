@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// Enums for network errors
 enum NetworkError: String,LocalizedError {
     case invalidURL =  "Invalid URL"
     case requestFailed = "Request failed"
@@ -17,6 +19,7 @@ enum NetworkError: String,LocalizedError {
     
 }
 
+/// Enums for decoding errors
 enum DecodingErrors : String, LocalizedError{
     case decodeError = "Some error occured while decoding"
 }

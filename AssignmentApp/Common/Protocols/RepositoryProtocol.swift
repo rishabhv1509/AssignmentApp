@@ -9,6 +9,6 @@ import Foundation
 
 protocol Repository : AnyObject {
     
-    func fetchStoreDataFromRepo(_ data: [Item])
+    func fetchStoreDataFromRepository(_ data: [Item])
     
 }
