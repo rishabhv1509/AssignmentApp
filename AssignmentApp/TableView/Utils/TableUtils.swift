@@ -35,6 +35,7 @@ struct TableUtils {
         tableView.showsVerticalScrollIndicator = true
         tableView.rowHeight = Constants.tableRowHeight
         tableView.frame = .zero
+        tableView.separatorStyle = .none
         tableView.contentInset = UIEdgeInsets(top: Constants.tableTopPadding, left: 0, bottom: 0, right: 0)
     }
     

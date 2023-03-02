@@ -28,10 +28,10 @@ class HomePage: UIPageViewController, UIPageViewControllerDataSource, UIPageView
         self.dataSource = self
         self.delegate = self
         
-        if let firstPage = pages.first {
-            setViewControllers([firstPage], direction: .forward, animated: false, completion: nil)
-        }
-        
+//        if let firstPage = pages.first {
+//            setViewControllers([firstPage], direction: .forward, animated: false, completion: nil)
+//        }
+        self.selectPage(at: 0)
     }
     
     func selectPage(at index: Int) {
@@ -67,14 +67,14 @@ class HomePage: UIPageViewController, UIPageViewControllerDataSource, UIPageView
         return index > self.prevIndex ? .forward : .reverse
     }
     
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return pages.count
-    }
+//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+//        return pages.count
+//    }
     
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        guard let currentVC = pageViewController.viewControllers?.first else { return 0 }
-        return pages.firstIndex(of: currentVC) ?? 0
-    }
+//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+//        guard let currentVC = pageViewController.viewControllers?.first else { return 0 }
+//        return pages.firstIndex(of: currentVC) ?? 0
+//    }
     
     
 }

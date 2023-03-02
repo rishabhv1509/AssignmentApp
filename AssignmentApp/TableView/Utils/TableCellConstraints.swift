@@ -29,6 +29,7 @@ struct TableCellContraints{
         setSubtitleConstraints()
         setMRPConstraints()
         setExtraSubtitleConstraints()
+        setDividerConstraints()
     }
     
     // MARK: set extra subtitle contraints

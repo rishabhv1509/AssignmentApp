@@ -9,21 +9,17 @@ import Foundation
 import UIKit
 
 class GridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, StoreVMDelegate {
-    
-    
-    
+
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var viewModel: StoreViewModel = StoreViewModel.instance
     private var storeItems:[Item] = []
     private var baseItems:[Item] = []
     private var appBar = AppBarView()
     private var stackView = UIStackView()
-    
-    
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        appBar.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
         appBar.searchBar.delegate = self

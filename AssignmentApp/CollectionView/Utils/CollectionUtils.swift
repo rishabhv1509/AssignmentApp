@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-/// Utilities to setup table view
+/// Utilities to setup collection view
 struct CollectionUtils {
     //    static let instance = TableUtils(view: UIView())
     

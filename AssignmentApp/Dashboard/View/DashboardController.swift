@@ -50,11 +50,11 @@ class DashboardViewController: UITabBarController, UITabBarControllerDelegate, P
         
         self.tabBar.addTopBorder(withColor: UIColor.init(hex: "#BDC5CD")!, thickness: 0.5)
         self.tabBar.barStyle = .default
-//        self.tabBar.barTintColor = .white
-//        self.tabBar.tintColor = .green
-//        self.tabBar.unselectedItemTintColor = .lightGray
+        self.tabBar.barTintColor = .white
+        self.tabBar.tintColor = .green
+        self.tabBar.unselectedItemTintColor = .lightGray
         self.tabBar.backgroundColor = .white
-//        self.tabBar.isOpaque = true
+        self.tabBar.isOpaque = true
         self.tabBar.insetsLayoutMarginsFromSafeArea =  true
     }
     
