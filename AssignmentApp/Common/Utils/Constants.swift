@@ -32,7 +32,7 @@ struct Constants{
     static let exploreSize = 18.0
     static let filterSize = 16.0
     static let searchSize = 16.0
-    static let tableRowHeight = 20.0
+    static let tableRowHeight = 80.0
     
     // MARK: Font Name Constants
     static let interRegular = "Inter-Regular"

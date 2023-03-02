@@ -11,17 +11,22 @@ import UIKit
 
 /// Utilities to setup table view
 struct TableUtils {
-    var tableView : UITableView
-    var view : UIView
-    var stackView : UIStackView
-    var appBar : AppBarView
+//    static let instance = TableUtils(view: UIView())
     
-    init(tableView: UITableView, view: UIView, stackView: UIStackView, appBar: AppBarView) {
-        self.tableView = tableView
-        self.view = view
-        self.stackView = stackView
-        self.appBar = appBar
-    }
+    var view : UIView
+    
+     var tableView : UITableView!
+      var stackView : UIStackView!
+     var appBar : AppBarView!
+    
+    
+        init(tableView: UITableView, view: UIView, stackView: UIStackView, appBar: AppBarView) {
+            self.tableView = tableView
+            self.view = view
+            self.stackView = stackView
+            self.appBar = appBar
+            
+        }
     
     
     /// setup table values
@@ -45,8 +50,18 @@ struct TableUtils {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         let views = [ appBar, tableView]
         for view in views {
-            stackView.addArrangedSubview(view)
+            stackView.addArrangedSubview(view!)
         }
         view.addSubview(stackView)
+    }
+    
+    func setupCell(item : Item, cell : TableCell) -> UITableViewCell {
+        cell.configureLeadingImage(image: item.image)
+        cell.configureTitle(title: item.name )
+        cell.configureSubtitle(subtitle: item.price )
+        cell.configureExtraSubtitle(shippingDay: item.extra)
+        cell.configureMrpSubtitle()
+        cell.selectionStyle = .none
+        return cell
     }
 }
