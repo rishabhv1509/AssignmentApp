@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class GridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, StoreVMDelegate {
-  
+    
     
     
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -24,56 +24,18 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         super.viewDidLoad()
         appBar.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.dataSource = self
+        collectionView.delegate = self
         appBar.searchBar.delegate = self
         viewModel.vmDelegate = self
-        setupCollectionView()
-        setupStackView()
-        addConstraints()
+        CollectionUtils(collectionView: collectionView, view: self.view, stackView: stackView, appBar: appBar).setupCollectionValues()
+        CollectionUtils(collectionView: collectionView, view: self.view, stackView: stackView, appBar: appBar).setupStackView()
+        CollectionViewConstraints(appBar: appBar, tableView: collectionView, view: self.view).setConstraints()
         viewModel.fetchStoreData()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
-    }
-    
-    func setupStackView(){
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.alignment = .leading
-        stackView.distribution = .fill
-        stackView.spacing = 20
-        let views = [ appBar, collectionView]
-        for view in views {
-            stackView.addArrangedSubview(view)
-        }
-        view.addSubview(stackView)
-    }
-    func setupCollectionView( ){
-        collectionView.frame = view.bounds
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(GridCell.self, forCellWithReuseIdentifier: GridCell.identifier)
-    }
-    
-    func addConstraints(){
-        let appBarTop = NSLayoutConstraint(item: appBar, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-        let appBarLeading = NSLayoutConstraint(item: appBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
-        let appBarTrailing = NSLayoutConstraint(item: appBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
-        let gridLeading = NSLayoutConstraint(item: collectionView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
-        let gridTrailing = NSLayoutConstraint(item: collectionView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: -0)
-        let appBarHeight = NSLayoutConstraint(item: appBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: appBar.appBarHeight)
-        let tableBottom = NSLayoutConstraint(item: collectionView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -100)
-
-        NSLayoutConstraint.activate(
-            [
-                gridLeading, gridTrailing,
-                appBarTop,
-                tableBottom,
-                appBarLeading, appBarTrailing,
-                appBarHeight
-            ]
-        )
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -83,10 +45,8 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GridCell.identifier, for: indexPath) as! GridCell
         let item = storeItems[indexPath.row]
-        cell.configureTitle(title: item.name )
-        cell.configuresubTitle(subTitle: item.price)
-        cell.configureThumbnailImage(image: item.image)
-        return cell
+        return CollectionUtils(collectionView: collectionView, view: self.view, stackView: stackView, appBar: appBar).setupCell(item: item, cell: cell)
+        
     }
     
     //MARK: Building the width and height of the collection view layout
@@ -105,24 +65,20 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
         return 32
     }
     
-    
     func search(forText: String){
         
         storeItems = storeItems.filter { item in
             item.name.lowercased().contains(forText.lowercased())
         }
         collectionView.reloadData()
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
         if(searchText.isEmpty){
             storeItems = baseItems
             collectionView.reloadData()
         }else{
             search(forText: searchText)}
-        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -139,7 +95,5 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
                 self.collectionView.reloadData()
             }
         }
-        
     }
-
 }

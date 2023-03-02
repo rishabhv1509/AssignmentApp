@@ -18,8 +18,6 @@ class ApiService  {
     init( networkClient: NetworkClient) {
         
         self.networkClient = networkClient
-
-        
     }
     
     

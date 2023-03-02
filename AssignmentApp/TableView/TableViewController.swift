@@ -71,7 +71,6 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
             item.name.lowercased().contains(forText.lowercased())
         }
         tableView.reloadData()
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -81,12 +80,9 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
             tableView.reloadData()
         }else{
             search(forText: searchText)}
-        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
         storeItems = baseItems
-        
     }
 }

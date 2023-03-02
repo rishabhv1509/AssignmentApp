@@ -55,6 +55,12 @@ struct TableUtils {
         view.addSubview(stackView)
     }
     
+    
+    /// Setup Cell
+    /// - Parameters:
+    ///   - item: item which is converted into cell
+    ///   - cell: cell type to be converted in
+    /// - Returns: return a cell from the item
     func setupCell(item : Item, cell : TableCell) -> UITableViewCell {
         cell.configureLeadingImage(image: item.image)
         cell.configureTitle(title: item.name )
