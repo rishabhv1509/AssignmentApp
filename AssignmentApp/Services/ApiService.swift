@@ -10,37 +10,45 @@ import Foundation
 
 /// Service to fetch data from API
 /// 
-class ApiService  {
-    static var instance = ApiService(networkClient: NetworkClient.instance)
-    var apiDelegate : ApiDelegate!
-    var networkClient : NetworkClient
+class ApiService : NetworkDelegate  {
     
-    init( networkClient: NetworkClient) {
-        
+    var apiDelegate : ApiDelegate!
+    var networkClient : NetworkClient = NetworkClient()
+    
+    init(networkClient: NetworkClient) {
         self.networkClient = networkClient
+        self.networkClient.networkDelegate = self
     }
     
+    init (){
+        self.networkClient.networkDelegate = self
+    }
     
     /// fetch store data from api
-    func fetchStoreData() {
-        var storeData : DataWrapper<BaseModel, LocalizedError> = DataWrapper()
-        networkClient.getResponse(urlString: Urls.getStoreData, completion: { data in
-            switch data {
-                case .success(let response):
-                    do{
-                        storeData.response = try StoreResponseModel(data: response)
-                    }
-                    catch{
-                        storeData.error=DecodingErrors.decodeError
-                    }
-                case .failure(let networkError):
-                    storeData.error=networkError
-            }
-            self.apiDelegate?.fetchApiData(storeData)
-        })
+    func fetchStoreDataFromApi() {
+        self.networkClient.getResponse(urlString: Urls.getStoreData)
     }
     
+    func networkResponseRecieved(_ data: ApiResponse<Data,NetworkError>) {
+        var apiResponse = DataWrapper<StoreResponseModel, LocalizedError>()
+        print("data---", data)
+        switch data {
+            case .success(let response):
+                do{
+                    let storeResponse = try StoreResponseModel(data: response)
+                    apiResponse.data = storeResponse
+                }
+                catch{
+                    apiResponse.error = DecodingErrors.decodeError
+                }
+            case .failure(let networkError):
+                apiResponse.error = networkError
+        }
+        self.apiDelegate?.fetchedApiData(apiResponse)
+    }
 }
+
+
 
 
 

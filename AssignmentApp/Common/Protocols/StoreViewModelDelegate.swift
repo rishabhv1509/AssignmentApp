@@ -8,5 +8,5 @@
 import Foundation
 
 protocol StoreVMDelegate : AnyObject {
-    func fetchDataFromVm(_ storeData : [Item])
+    func fetchedDataFromVm(_ vmData : DataWrapper<[Item], LocalizedError>)
 }

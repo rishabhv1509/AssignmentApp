@@ -21,6 +21,7 @@
 		18541B5E299F464B00D3B959 /* EncoderDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18541B5D299F464B00D3B959 /* EncoderDecoder.swift */; };
 		18541B61299F4A6100D3B959 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18541B60299F4A6100D3B959 /* Urls.swift */; };
 		18541B63299F523A00D3B959 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18541B62299F523A00D3B959 /* NetworkClient.swift */; };
+		185DD3F429B0B93D0097856C /* CoreDataServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DD3F329B0B93D0097856C /* CoreDataServiceTest.swift */; };
 		18659C4029A3CA2E003DDB0F /* ResponseEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C3F29A3CA2E003DDB0F /* ResponseEnums.swift */; };
 		18659C4229A3CA3D003DDB0F /* ErrorEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C4129A3CA3D003DDB0F /* ErrorEnums.swift */; };
 		18659C4629A40D8C003DDB0F /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18659C4529A40D8C003DDB0F /* ApiService.swift */; };
@@ -97,6 +98,7 @@
 		18541B5D299F464B00D3B959 /* EncoderDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncoderDecoder.swift; sourceTree = "<group>"; };
 		18541B60299F4A6100D3B959 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
 		18541B62299F523A00D3B959 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		185DD3F329B0B93D0097856C /* CoreDataServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceTest.swift; sourceTree = "<group>"; };
 		18659C3F29A3CA2E003DDB0F /* ResponseEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseEnums.swift; sourceTree = "<group>"; };
 		18659C4129A3CA3D003DDB0F /* ErrorEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorEnums.swift; sourceTree = "<group>"; };
 		18659C4529A40D8C003DDB0F /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -206,7 +208,9 @@
 		1840C6C9299A95A70090EEE1 /* AssignmentAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				1858BF3529B34FE2005CEACB /* MockDelegates */,
 				1840C6CA299A95A70090EEE1 /* AssignmentAppTests.swift */,
+				185DD3F329B0B93D0097856C /* CoreDataServiceTest.swift */,
 			);
 			path = AssignmentAppTests;
 			sourceTree = "<group>";
@@ -267,6 +271,13 @@
 				18659C4129A3CA3D003DDB0F /* ErrorEnums.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		1858BF3529B34FE2005CEACB /* MockDelegates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MockDelegates;
 			sourceTree = "<group>";
 		};
 		18659C4D29A429DA003DDB0F /* Repository */ = {
@@ -592,6 +603,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185DD3F429B0B93D0097856C /* CoreDataServiceTest.swift in Sources */,
 				1840C6CB299A95A70090EEE1 /* AssignmentAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

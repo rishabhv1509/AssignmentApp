@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol Repository : AnyObject {
+protocol RepositoryDelegate : AnyObject {
     
-    func fetchStoreDataFromRepository(_ data: [Item])
+    func fetchedRepositoryData(_ repositoryData: DataWrapper<[Item], LocalizedError>)
     
 }

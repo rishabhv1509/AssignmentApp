@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class GridViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, StoreVMDelegate {
-
+    
     private var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private var viewModel: StoreViewModel = StoreViewModel.instance
     private var storeItems:[Item] = []
@@ -84,7 +84,11 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func fetchDataFromVm(_ data: [Item]) {
-        storeItems = data
+       
+    }
+    
+    func fetchedDataFromVm(_ vmData: DataWrapper<[Item], LocalizedError>) {
+        storeItems = vmData.data!
         baseItems = storeItems
         DispatchQueue.global(qos: .background).async {
             DispatchQueue.main.async {

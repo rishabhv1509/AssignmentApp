@@ -11,20 +11,24 @@ import Foundation
 /// Repository to handle db and api data
 class StoreRepository : ApiDelegate , CoreDataDelegate {
     
-    var apiService : ApiService
-    var coreDataService : CoreDataService
-    weak var repositoryDelegate : Repository!
+    
+    
+    var apiService : ApiService = ApiService()
+    var coreDataService : CoreDataService = CoreDataService()
+    weak var repositoryDelegate : RepositoryDelegate!
     var storeItems : [Item] = []
     
-    static let instance = StoreRepository(apiService: ApiService.instance, coreDataService: CoreDataService.instance)
-    
-    
-    init(apiService : ApiService, coreDataService : CoreDataService) {
-        self.apiService = apiService
-        self.coreDataService = coreDataService
-        self.coreDataService.coreDataDelegate = self
-        self.apiService.apiDelegate = self
+    init(apiService: ApiService!, coreDataService: CoreDataService!) {
+        self.apiService = apiService ?? ApiService()
+        self.coreDataService = coreDataService ?? CoreDataService()
+
     }
+    
+    init(){
+        coreDataService.coreDataDelegate = self
+        apiService.apiDelegate = self
+    }
+    
     
     
     /// get data for VM
@@ -33,24 +37,27 @@ class StoreRepository : ApiDelegate , CoreDataDelegate {
     }
     
     
-    /// delegate to fetch data from the api
+    /// delegate to get fetched data from the api
     /// - Parameter data: response coming from api
-    func fetchApiData(_ data: DataWrapper<BaseModel, LocalizedError>) {
-        let apiData = data.response as? StoreResponseModel
+    func fetchedApiData(_ apiResponse: DataWrapper<StoreResponseModel, LocalizedError>) {
+        let apiData = apiResponse.data
         coreDataService.saveDataInDb(items: (apiData?.data.items)!)
         getStoreData()
     }
     
     
-    /// delegate to fetch data from the internal db
+    /// delegate to get fetched data from the internal db
     /// - Parameter data: response coming from internal db
-    func fetchCoreData(_ data: DataWrapper<[Item], LocalizedError>) {
-        let coreData = data.response
+    func fetchedCoreData(_ data: DataWrapper<[Item], LocalizedError>) {
+        var storeDataforVm = DataWrapper<[Item], LocalizedError>()
+        let coreData = data.data
         if(coreData!.isEmpty){
-            apiService.fetchStoreData()
+            apiService.fetchStoreDataFromApi()
         }
         else{
-            repositoryDelegate.fetchStoreDataFromRepository(coreData!)
+            storeDataforVm.data = coreData
+            storeDataforVm.error = data.error
+            repositoryDelegate.fetchedRepositoryData(storeDataforVm)
         }
     }
     

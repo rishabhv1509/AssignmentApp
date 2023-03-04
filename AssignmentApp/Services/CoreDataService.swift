@@ -13,19 +13,25 @@ import CoreData
 /// Service to fetch and save data from DB
 struct CoreDataService {
     
-    static let instance = CoreDataService()
     
-    private var appDelegate : AppDelegate
-    private var managedContext : NSManagedObjectContext
+    var appDelegate : AppDelegate = ((UIApplication.shared.delegate as? AppDelegate)!)
+    var managedContext : NSManagedObjectContext!
+    weak var coreDataDelegate : CoreDataDelegate!
     
-    var coreDataDelegate : CoreDataDelegate!
+
     
-    init() {
-        appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-        managedContext = appDelegate.persistentContainer.viewContext
+    init(appDelegate: AppDelegate, managedContext: NSManagedObjectContext!) {
+        self.appDelegate = appDelegate
+        self.managedContext = managedContext
+        
     }
     
- // TODO: Add errors as well to data wrapper
+    init() {
+        self.managedContext = appDelegate.persistentContainer.viewContext
+    }
+    
+    
+    // TODO: Add errors as well to data wrapper
     
     
     /// fetch data from DB
@@ -35,20 +41,25 @@ struct CoreDataService {
         var storeData : DataWrapper<[Item], LocalizedError> = DataWrapper()
         
         do {
-            
             let result = try managedContext.fetch(CoreItem.fetchRequest())
             if(!result.isEmpty){
                 
                 for item in result {
-                    coreItemsList.append(try! Item(coreItem: item))
+                    do{
+                      
+                        coreItemsList.append(try Item(coreItem: item))
+                        
+                    }catch{
+                        storeData.error = DecodingErrors.decodeError
+                    }
                 }
                 
             }
-            storeData.response = coreItemsList
-            coreDataDelegate.fetchCoreData(storeData)
+            storeData.data = coreItemsList
+            coreDataDelegate.fetchedCoreData(storeData)
         } catch let error as NSError {
             storeData.error = error
-            coreDataDelegate.fetchCoreData(storeData)
+            coreDataDelegate.fetchedCoreData(storeData)
         }
     }
     
@@ -56,7 +67,7 @@ struct CoreDataService {
     /// - Parameter items: list of store items
     func saveDataInDb(items : [Item] ){
         do{
-            try managedContext.execute(NSBatchDeleteRequest(fetchRequest: CoreItem.fetchRequest()))
+            deleteAll()
             for item in items {
                 let itemEntity = CoreItem(context: managedContext)
                 itemEntity.name = item.name
@@ -70,5 +81,12 @@ struct CoreDataService {
         }
     }
     
+    func deleteAll(){
+        do{
+            try managedContext.execute(NSBatchDeleteRequest(fetchRequest: CoreItem.fetchRequest()))
+        } catch {
+            print("error in deleting")
+        }
+    }
     
 }

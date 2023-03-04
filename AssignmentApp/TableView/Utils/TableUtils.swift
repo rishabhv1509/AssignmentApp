@@ -72,3 +72,4 @@ struct TableUtils {
         return cell
     }
 }
+

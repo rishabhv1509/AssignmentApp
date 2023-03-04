@@ -9,19 +9,20 @@ import Foundation
 
 
 /// View Model to communicate b/w view and repository
-class StoreViewModel : Repository {
+class StoreViewModel : RepositoryDelegate {
     
-   
-    var storeRepository : StoreRepository
+    var storeRepository : StoreRepository = StoreRepository()
     weak var vmDelegate : StoreVMDelegate!
-    static let instance = StoreViewModel(storeRepository: StoreRepository.instance)
+    static let instance = StoreViewModel(storeRepository: StoreRepository())
     
     init( storeRepository: StoreRepository) {
-        
         self.storeRepository = storeRepository
         self.storeRepository.repositoryDelegate = self
     }
-
+    
+    init(){
+        self.storeRepository.repositoryDelegate = self
+    }
     
     /// fetch data from repository
     func fetchStoreData()  {
@@ -29,11 +30,11 @@ class StoreViewModel : Repository {
         storeRepository.getStoreData()
     }
     
-    
     /// delegate method to pass data to view
     /// - Parameter data: list of store items
-    func fetchStoreDataFromRepository(_ data: [Item]) {
-        vmDelegate.fetchDataFromVm(data)
-        
+    func fetchedRepositoryData(_ repositoryData: DataWrapper<[Item], LocalizedError>) {
+        vmDelegate.fetchedDataFromVm(repositoryData)
     }
+    
+    
 }

@@ -11,6 +11,8 @@ import CoreData
 
 
 class TableViewController:UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate, StoreVMDelegate{
+ 
+    
 
     private var loader = LoaderView()
     private var tableView = UITableView()
@@ -40,8 +42,8 @@ class TableViewController:UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     
-    func fetchDataFromVm(_ data: [Item]) {
-        storeItems = data
+    func fetchedDataFromVm(_ vmData: DataWrapper<[Item], LocalizedError>) {
+        storeItems = vmData.data!
         baseItems = storeItems
         DispatchQueue.global(qos: .background).async {
             DispatchQueue.main.async {
