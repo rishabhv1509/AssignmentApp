@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct DataWrapper<BaseModel,NetworkError> {
-    
+struct DataWrapper<BaseModel, NetworkError>: Equatable where NetworkError: LocalizedError, BaseModel: Equatable {
     var data: BaseModel?
-    var error: LocalizedError?
+    var error: NetworkError?
     
+    static func == (lhs: DataWrapper<BaseModel, NetworkError>, rhs: DataWrapper<BaseModel, NetworkError>) -> Bool {
+        return lhs.data == rhs.data && lhs.error?.errorDescription == rhs.error?.errorDescription
+    }
 }
+
+

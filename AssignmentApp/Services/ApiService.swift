@@ -10,12 +10,12 @@ import Foundation
 
 /// Service to fetch data from API
 /// 
-class ApiService : NetworkDelegate  {
+class ApiService : NetworkDelegate  { 
     
     var apiDelegate : ApiDelegate!
     var networkClient : NetworkClient = NetworkClient()
     
-    init(networkClient: NetworkClient) {
+    init(networkClient: NetworkClient) { 
         self.networkClient = networkClient
         self.networkClient.networkDelegate = self
     }
@@ -30,8 +30,8 @@ class ApiService : NetworkDelegate  {
     }
     
     func networkResponseRecieved(_ data: ApiResponse<Data,NetworkError>) {
-        var apiResponse = DataWrapper<StoreResponseModel, LocalizedError>()
-        print("data---", data)
+        var apiResponse = DataWrapper<StoreResponseModel, NetworkError>()
+        
         switch data {
             case .success(let response):
                 do{
@@ -39,7 +39,7 @@ class ApiService : NetworkDelegate  {
                     apiResponse.data = storeResponse
                 }
                 catch{
-                    apiResponse.error = DecodingErrors.decodeError
+                    apiResponse.error = NetworkError.clientError
                 }
             case .failure(let networkError):
                 apiResponse.error = networkError

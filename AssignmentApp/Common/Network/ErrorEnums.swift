@@ -9,7 +9,7 @@ import Foundation
 
 
 /// Enums for network errors
-enum NetworkError: String,LocalizedError {
+enum NetworkError: String,LocalizedError, Equatable {
     case invalidURL =  "Invalid URL"
     case requestFailed = "Request failed"
     case invalidData = "Invalid data"
@@ -17,10 +17,17 @@ enum NetworkError: String,LocalizedError {
     case serverError = "Some server error occured"
     case unexpectedError = "Some error occured"
     
+    static func ==(lhs: NetworkError, rhs: NetworkError) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
+    
 }
 
 /// Enums for decoding errors
-enum DecodingErrors : String, LocalizedError{
+enum DecodingErrors : String, LocalizedError, Equatable{
     case decodeError = "Some error occured while decoding"
+    static func ==(lhs: DecodingErrors, rhs: DecodingErrors) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
 }
 

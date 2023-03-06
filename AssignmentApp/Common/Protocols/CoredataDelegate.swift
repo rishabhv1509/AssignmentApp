@@ -9,5 +9,5 @@ import Foundation
 
 protocol CoreDataDelegate : AnyObject {
     
-    func fetchedCoreData(_ data : DataWrapper<[Item], LocalizedError>)
+    func fetchedCoreData(_ data : DataWrapper<[Item], NetworkError>)
 }

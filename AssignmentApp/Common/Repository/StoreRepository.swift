@@ -15,8 +15,7 @@ class StoreRepository : ApiDelegate , CoreDataDelegate {
     
     var apiService : ApiService = ApiService()
     var coreDataService : CoreDataService = CoreDataService()
-    weak var repositoryDelegate : RepositoryDelegate!
-    var storeItems : [Item] = []
+    var repositoryDelegate : RepositoryDelegate!
     
     init(apiService: ApiService!, coreDataService: CoreDataService!) {
         self.apiService = apiService ?? ApiService()
@@ -39,7 +38,7 @@ class StoreRepository : ApiDelegate , CoreDataDelegate {
     
     /// delegate to get fetched data from the api
     /// - Parameter data: response coming from api
-    func fetchedApiData(_ apiResponse: DataWrapper<StoreResponseModel, LocalizedError>) {
+    func fetchedApiData(_ apiResponse: DataWrapper<StoreResponseModel, NetworkError>) {
         let apiData = apiResponse.data
         coreDataService.saveDataInDb(items: (apiData?.data.items)!)
         getStoreData()
@@ -48,8 +47,8 @@ class StoreRepository : ApiDelegate , CoreDataDelegate {
     
     /// delegate to get fetched data from the internal db
     /// - Parameter data: response coming from internal db
-    func fetchedCoreData(_ data: DataWrapper<[Item], LocalizedError>) {
-        var storeDataforVm = DataWrapper<[Item], LocalizedError>()
+    func fetchedCoreData(_ data: DataWrapper<[Item], NetworkError>) {
+        var storeDataforVm = DataWrapper<[Item], NetworkError>()
         let coreData = data.data
         if(coreData!.isEmpty){
             apiService.fetchStoreDataFromApi()

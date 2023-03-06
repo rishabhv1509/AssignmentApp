@@ -9,5 +9,5 @@ import Foundation
 
 protocol ApiDelegate : AnyObject {
     
-    func fetchedApiData(_ apiResponse: DataWrapper<StoreResponseModel, LocalizedError>)
+    func fetchedApiData(_ apiResponse: DataWrapper<StoreResponseModel, NetworkError>)
 }

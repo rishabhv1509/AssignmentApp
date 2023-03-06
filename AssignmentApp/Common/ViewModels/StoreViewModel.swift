@@ -12,15 +12,16 @@ import Foundation
 class StoreViewModel : RepositoryDelegate {
     
     var storeRepository : StoreRepository = StoreRepository()
-    weak var vmDelegate : StoreVMDelegate!
+    var vmDelegate : StoreVMDelegate!
     static let instance = StoreViewModel(storeRepository: StoreRepository())
     
-    init( storeRepository: StoreRepository) {
+    init(storeRepository: StoreRepository) {
         self.storeRepository = storeRepository
         self.storeRepository.repositoryDelegate = self
     }
     
     init(){
+        
         self.storeRepository.repositoryDelegate = self
     }
     
@@ -32,7 +33,7 @@ class StoreViewModel : RepositoryDelegate {
     
     /// delegate method to pass data to view
     /// - Parameter data: list of store items
-    func fetchedRepositoryData(_ repositoryData: DataWrapper<[Item], LocalizedError>) {
+    func fetchedRepositoryData(_ repositoryData: DataWrapper<[Item], NetworkError>) {
         vmDelegate.fetchedDataFromVm(repositoryData)
     }
     

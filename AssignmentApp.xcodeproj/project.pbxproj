@@ -12,7 +12,7 @@
 		1840C6B8299A95A40090EEE1 /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840C6B7299A95A40090EEE1 /* DashboardController.swift */; };
 		1840C6BB299A95A40090EEE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1840C6B9299A95A40090EEE1 /* Main.storyboard */; };
 		1840C6BD299A95A60090EEE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1840C6BC299A95A60090EEE1 /* Assets.xcassets */; };
-		1840C6CB299A95A70090EEE1 /* AssignmentAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840C6CA299A95A70090EEE1 /* AssignmentAppTests.swift */; };
+		1840C6CB299A95A70090EEE1 /* NetworkClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840C6CA299A95A70090EEE1 /* NetworkClientTest.swift */; };
 		1840C6D5299A95A70090EEE1 /* AssignmentAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840C6D4299A95A70090EEE1 /* AssignmentAppUITests.swift */; };
 		1840C6D7299A95A70090EEE1 /* AssignmentAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1840C6D6299A95A70090EEE1 /* AssignmentAppUITestsLaunchTests.swift */; };
 		18541B55299F2FC600D3B959 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18541B54299F2FC600D3B959 /* ItemModel.swift */; };
@@ -50,8 +50,13 @@
 		18A1320629AD20EA000F45ED /* CoreItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1320429AD20EA000F45ED /* CoreItem+CoreDataClass.swift */; };
 		18A1320729AD20EA000F45ED /* CoreItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1320529AD20EA000F45ED /* CoreItem+CoreDataProperties.swift */; };
 		18A1320A29ADDF29000F45ED /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1320929ADDF29000F45ED /* CoreDataService.swift */; };
-		18A1320D29ADF5B8000F45ED /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1320C29ADF5B8000F45ED /* RepositoryProtocol.swift */; };
+		18A1320D29ADF5B8000F45ED /* RepositoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A1320C29ADF5B8000F45ED /* RepositoryDelegate.swift */; };
 		18C059BA29ABCAE4008430C2 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C059B929ABCAE4008430C2 /* HomePageController.swift */; };
+		18DFC68F29B4BF41007FACDC /* MockNetworkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DFC68E29B4BF41007FACDC /* MockNetworkDelegate.swift */; };
+		18DFC69129B4D3D8007FACDC /* ApiServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DFC69029B4D3D8007FACDC /* ApiServiceTest.swift */; };
+		18DFC69329B4DBE0007FACDC /* MockApiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DFC69229B4DBE0007FACDC /* MockApiDelegate.swift */; };
+		18DFC69729B5C946007FACDC /* MockStoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DFC69629B5C946007FACDC /* MockStoreData.swift */; };
+		18DFC69929B5D6A9007FACDC /* MockCoreDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DFC69829B5D6A9007FACDC /* MockCoreDataDelegate.swift */; };
 		18E699B929AF47C30031D6F4 /* ApiDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699B829AF47C30031D6F4 /* ApiDelegate.swift */; };
 		18E699BB29AF4E090031D6F4 /* NetworkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699BA29AF4E090031D6F4 /* NetworkDelegate.swift */; };
 		18E699BD29AF69360031D6F4 /* CoredataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699BC29AF69360031D6F4 /* CoredataDelegate.swift */; };
@@ -60,6 +65,10 @@
 		18E699CC29B016CE0031D6F4 /* TableUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699CB29B016CE0031D6F4 /* TableUtils.swift */; };
 		18E699CE29B023680031D6F4 /* CollectionViewConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699CD29B023680031D6F4 /* CollectionViewConstraints.swift */; };
 		18E699D029B024750031D6F4 /* CollectionUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E699CF29B024750031D6F4 /* CollectionUtils.swift */; };
+		18ECE44429B5E46E00A1429F /* StoreRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ECE44329B5E46E00A1429F /* StoreRepositoryTest.swift */; };
+		18ECE44629B5EC3E00A1429F /* MockRepositoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ECE44529B5EC3E00A1429F /* MockRepositoryDelegate.swift */; };
+		18ECE44829B5F89D00A1429F /* StoreViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ECE44729B5F89D00A1429F /* StoreViewModelTests.swift */; };
+		18ECE44A29B5F90600A1429F /* MockStoreViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ECE44929B5F90600A1429F /* MockStoreViewModelDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +97,7 @@
 		1840C6BC299A95A60090EEE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1840C6C1299A95A60090EEE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1840C6C6299A95A70090EEE1 /* AssignmentAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssignmentAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1840C6CA299A95A70090EEE1 /* AssignmentAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentAppTests.swift; sourceTree = "<group>"; };
+		1840C6CA299A95A70090EEE1 /* NetworkClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientTest.swift; sourceTree = "<group>"; };
 		1840C6D0299A95A70090EEE1 /* AssignmentAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssignmentAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1840C6D4299A95A70090EEE1 /* AssignmentAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentAppUITests.swift; sourceTree = "<group>"; };
 		1840C6D6299A95A70090EEE1 /* AssignmentAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -127,8 +136,13 @@
 		18A1320429AD20EA000F45ED /* CoreItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreItem+CoreDataClass.swift"; path = "AssignmentApp/Common/Models/CoreModels/CoreItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		18A1320529AD20EA000F45ED /* CoreItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreItem+CoreDataProperties.swift"; path = "AssignmentApp/Common/Models/CoreModels/CoreItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		18A1320929ADDF29000F45ED /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
-		18A1320C29ADF5B8000F45ED /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
+		18A1320C29ADF5B8000F45ED /* RepositoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDelegate.swift; sourceTree = "<group>"; };
 		18C059B929ABCAE4008430C2 /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
+		18DFC68E29B4BF41007FACDC /* MockNetworkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkDelegate.swift; sourceTree = "<group>"; };
+		18DFC69029B4D3D8007FACDC /* ApiServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceTest.swift; sourceTree = "<group>"; };
+		18DFC69229B4DBE0007FACDC /* MockApiDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiDelegate.swift; sourceTree = "<group>"; };
+		18DFC69629B5C946007FACDC /* MockStoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStoreData.swift; sourceTree = "<group>"; };
+		18DFC69829B5D6A9007FACDC /* MockCoreDataDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataDelegate.swift; sourceTree = "<group>"; };
 		18E699B829AF47C30031D6F4 /* ApiDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDelegate.swift; sourceTree = "<group>"; };
 		18E699BA29AF4E090031D6F4 /* NetworkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDelegate.swift; sourceTree = "<group>"; };
 		18E699BC29AF69360031D6F4 /* CoredataDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +151,10 @@
 		18E699CB29B016CE0031D6F4 /* TableUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableUtils.swift; sourceTree = "<group>"; };
 		18E699CD29B023680031D6F4 /* CollectionViewConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewConstraints.swift; sourceTree = "<group>"; };
 		18E699CF29B024750031D6F4 /* CollectionUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionUtils.swift; sourceTree = "<group>"; };
+		18ECE44329B5E46E00A1429F /* StoreRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreRepositoryTest.swift; sourceTree = "<group>"; };
+		18ECE44529B5EC3E00A1429F /* MockRepositoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRepositoryDelegate.swift; sourceTree = "<group>"; };
+		18ECE44729B5F89D00A1429F /* StoreViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewModelTests.swift; sourceTree = "<group>"; };
+		18ECE44929B5F90600A1429F /* MockStoreViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStoreViewModelDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,9 +226,13 @@
 		1840C6C9299A95A70090EEE1 /* AssignmentAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				1858BF3529B34FE2005CEACB /* MockDelegates */,
-				1840C6CA299A95A70090EEE1 /* AssignmentAppTests.swift */,
+				18DFC68D29B4BF30007FACDC /* MockDelegates */,
+				1840C6CA299A95A70090EEE1 /* NetworkClientTest.swift */,
 				185DD3F329B0B93D0097856C /* CoreDataServiceTest.swift */,
+				18DFC69029B4D3D8007FACDC /* ApiServiceTest.swift */,
+				18DFC69629B5C946007FACDC /* MockStoreData.swift */,
+				18ECE44329B5E46E00A1429F /* StoreRepositoryTest.swift */,
+				18ECE44729B5F89D00A1429F /* StoreViewModelTests.swift */,
 			);
 			path = AssignmentAppTests;
 			sourceTree = "<group>";
@@ -271,13 +293,6 @@
 				18659C4129A3CA3D003DDB0F /* ErrorEnums.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		1858BF3529B34FE2005CEACB /* MockDelegates */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MockDelegates;
 			sourceTree = "<group>";
 		};
 		18659C4D29A429DA003DDB0F /* Repository */ = {
@@ -410,13 +425,25 @@
 		18A1320B29ADF5A2000F45ED /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				18A1320C29ADF5B8000F45ED /* RepositoryProtocol.swift */,
+				18A1320C29ADF5B8000F45ED /* RepositoryDelegate.swift */,
 				18E699B829AF47C30031D6F4 /* ApiDelegate.swift */,
 				18E699BA29AF4E090031D6F4 /* NetworkDelegate.swift */,
 				18E699BC29AF69360031D6F4 /* CoredataDelegate.swift */,
 				18E699C629AF99AC0031D6F4 /* StoreViewModelDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		18DFC68D29B4BF30007FACDC /* MockDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				18DFC68E29B4BF41007FACDC /* MockNetworkDelegate.swift */,
+				18DFC69229B4DBE0007FACDC /* MockApiDelegate.swift */,
+				18DFC69829B5D6A9007FACDC /* MockCoreDataDelegate.swift */,
+				18ECE44529B5EC3E00A1429F /* MockRepositoryDelegate.swift */,
+				18ECE44929B5F90600A1429F /* MockStoreViewModelDelegate.swift */,
+			);
+			path = MockDelegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -580,7 +607,7 @@
 				18541B61299F4A6100D3B959 /* Urls.swift in Sources */,
 				1840C6B8299A95A40090EEE1 /* DashboardController.swift in Sources */,
 				18659C6529A4A899003DDB0F /* TableCell.swift in Sources */,
-				18A1320D29ADF5B8000F45ED /* RepositoryProtocol.swift in Sources */,
+				18A1320D29ADF5B8000F45ED /* RepositoryDelegate.swift in Sources */,
 				18659C6D29A4F802003DDB0F /* CommonExtensions.swift in Sources */,
 				18541B63299F523A00D3B959 /* NetworkClient.swift in Sources */,
 				18659C4C29A429AB003DDB0F /* DataWrapper.swift in Sources */,
@@ -603,8 +630,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18ECE44629B5EC3E00A1429F /* MockRepositoryDelegate.swift in Sources */,
+				18DFC69329B4DBE0007FACDC /* MockApiDelegate.swift in Sources */,
+				18ECE44829B5F89D00A1429F /* StoreViewModelTests.swift in Sources */,
+				18ECE44429B5E46E00A1429F /* StoreRepositoryTest.swift in Sources */,
+				18ECE44A29B5F90600A1429F /* MockStoreViewModelDelegate.swift in Sources */,
+				18DFC69729B5C946007FACDC /* MockStoreData.swift in Sources */,
+				18DFC69929B5D6A9007FACDC /* MockCoreDataDelegate.swift in Sources */,
 				185DD3F429B0B93D0097856C /* CoreDataServiceTest.swift in Sources */,
-				1840C6CB299A95A70090EEE1 /* AssignmentAppTests.swift in Sources */,
+				18DFC68F29B4BF41007FACDC /* MockNetworkDelegate.swift in Sources */,
+				18DFC69129B4D3D8007FACDC /* ApiServiceTest.swift in Sources */,
+				1840C6CB299A95A70090EEE1 /* NetworkClientTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

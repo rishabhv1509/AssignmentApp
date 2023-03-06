@@ -87,7 +87,7 @@ class GridViewController: UIViewController, UICollectionViewDataSource, UICollec
        
     }
     
-    func fetchedDataFromVm(_ vmData: DataWrapper<[Item], LocalizedError>) {
+    func fetchedDataFromVm(_ vmData: DataWrapper<[Item], NetworkError>) {
         storeItems = vmData.data!
         baseItems = storeItems
         DispatchQueue.global(qos: .background).async {

@@ -9,14 +9,16 @@ import Foundation
 import UIKit
 import CoreData
 
-
+protocol CoreProto: AnyObject{
+    
+}
 /// Service to fetch and save data from DB
-struct CoreDataService {
+class CoreDataService : CoreProto {
     
     
     var appDelegate : AppDelegate = ((UIApplication.shared.delegate as? AppDelegate)!)
     var managedContext : NSManagedObjectContext!
-    weak var coreDataDelegate : CoreDataDelegate!
+    var coreDataDelegate : CoreDataDelegate!
     
 
     
@@ -38,8 +40,8 @@ struct CoreDataService {
     func fetchDataFromDb(){
         
         var coreItemsList : [Item] = []
-        var storeData : DataWrapper<[Item], LocalizedError> = DataWrapper()
-        
+        var storeData : DataWrapper<[Item], NetworkError> = DataWrapper()
+         
         do {
             let result = try managedContext.fetch(CoreItem.fetchRequest())
             if(!result.isEmpty){
@@ -50,15 +52,15 @@ struct CoreDataService {
                         coreItemsList.append(try Item(coreItem: item))
                         
                     }catch{
-                        storeData.error = DecodingErrors.decodeError
+                        storeData.error = NetworkError.invalidURL
                     }
                 }
                 
             }
             storeData.data = coreItemsList
             coreDataDelegate.fetchedCoreData(storeData)
-        } catch let error as NSError {
-            storeData.error = error
+        } catch  {
+            storeData.error = NetworkError.invalidURL
             coreDataDelegate.fetchedCoreData(storeData)
         }
     }
