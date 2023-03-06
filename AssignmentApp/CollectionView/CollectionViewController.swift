@@ -7,12 +7,12 @@
 
 import Foundation 
 import UIKit
+import Lottie
 
 class GridViewController: UIViewController,StoreVMDelegate {
     
     private var collectionView : CustomCollectionView?
-    private var loader : LoaderView?
-    private var isLoading = false
+    private var animationView: LottieAnimationView!
     private var viewModel: StoreViewModel = StoreViewModel()
     
     override func viewDidLoad() {
@@ -20,10 +20,13 @@ class GridViewController: UIViewController,StoreVMDelegate {
         viewModel.vmDelegate = self
         collectionView = CustomCollectionView(frame: self.view.frame)
         self.view.addSubview(collectionView!)
-        isLoading = true
-        loader = LoaderView(frame: self.view.frame)
-        self.view.addSubview(loader!)
-        loader?.startLoading(view: self.view)
+        animationView = LottieAnimationView(name: "loading")
+        animationView.loopMode = .loop
+        animationView.contentMode = .scaleAspectFit
+        view.addSubview(animationView)
+        DispatchQueue.main.async {
+            self.animationView.play()
+        }
         viewModel.fetchStoreData()
         
     }
@@ -35,10 +38,9 @@ class GridViewController: UIViewController,StoreVMDelegate {
     func fetchedDataFromVm(_ vmData: DataWrapper<[Item], NetworkError>) {
         
         collectionView?.storeItems = vmData.data!
-        isLoading = false
         DispatchQueue.main.async {
-            self.loader?.stopLoading(view: self.view)
-            self.loader?.removeFromSuperview()
+            self.animationView.stop()
+            self.animationView.removeFromSuperview()
         }
         
     }

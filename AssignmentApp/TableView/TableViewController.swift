@@ -14,12 +14,9 @@ import Lottie
 class TableViewController:UIViewController,StoreVMDelegate{
     
     private var tableView : CustomTableView?
-    private var loader : LoaderView?
     private var viewModel: StoreViewModel = StoreViewModel()
-    private var isLoading = false
     var animationView: LottieAnimationView!
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.vmDelegate = self
@@ -28,15 +25,8 @@ class TableViewController:UIViewController,StoreVMDelegate{
         animationView.loopMode = .loop
         animationView.contentMode = .scaleAspectFit
         self.view.addSubview(tableView!)
-        isLoading = true
-        loader = LoaderView(frame: self.view.frame)
-
         view.addSubview(animationView)
-        
-
-      
         DispatchQueue.main.async {
-
             self.animationView.play()
         }
         viewModel.fetchStoreData()
@@ -46,14 +36,14 @@ class TableViewController:UIViewController,StoreVMDelegate{
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
     }
-        func fetchedDataFromVm(_ vmData: DataWrapper<[Item], NetworkError>) {
-      
+    func fetchedDataFromVm(_ vmData: DataWrapper<[Item], NetworkError>) {
+        
         tableView?.storeItems = vmData.data!
-        isLoading = false
-            DispatchQueue.main.async {
-                self.animationView.stop()
-                self.animationView.removeFromSuperview()
-            }
+        
+        DispatchQueue.main.async {
+            self.animationView.stop()
+            self.animationView.removeFromSuperview()
+        }
         
     }
     
