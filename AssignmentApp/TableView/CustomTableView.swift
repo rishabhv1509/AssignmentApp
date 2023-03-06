@@ -35,7 +35,9 @@ class CustomTableView : UIView,UITableViewDataSource,UITableViewDelegate,UISearc
     var storeItems: [Item] = [] {
         didSet {
          baseItems = storeItems
-            tableView?.reloadData()
+            DispatchQueue.main.async {
+                self.tableView?.reloadData()
+            }
         }
     }
     var baseItems : [Item] = []

@@ -38,7 +38,9 @@ class CustomCollectionView: UIView, UICollectionViewDataSource, UICollectionView
     var storeItems: [Item] = [] {
         didSet {
             baseItems = storeItems
-            collectionView?.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
         }
     }
     

@@ -14,7 +14,7 @@ class TableViewController:UIViewController,StoreVMDelegate{
     
     private var tableView : CustomTableView?
     private var loader : LoaderView?
-    private var viewModel: StoreViewModel = StoreViewModel.instance
+    private var viewModel: StoreViewModel = StoreViewModel()
     private var isLoading = false
 
 
@@ -26,7 +26,9 @@ class TableViewController:UIViewController,StoreVMDelegate{
         isLoading = true
         loader = LoaderView(frame: self.view.frame)
         self.view.addSubview(loader!)
-        loader?.startLoading(view: self.view)
+        DispatchQueue.main.async {
+            self.loader?.startLoading(view: self.view)
+        }
         viewModel.fetchStoreData()
         
     }
@@ -38,8 +40,10 @@ class TableViewController:UIViewController,StoreVMDelegate{
       
         tableView?.storeItems = vmData.data!
         isLoading = false
-        loader?.stopLoading(view: self.view)
-        loader?.removeFromSuperview()
+            DispatchQueue.main.async {
+                self.loader?.stopLoading(view: self.view)
+                self.loader?.removeFromSuperview()
+            }
         
     }
     

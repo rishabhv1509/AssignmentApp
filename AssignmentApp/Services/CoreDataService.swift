@@ -41,53 +41,62 @@ class CoreDataService : CoreProto {
         
         var coreItemsList : [Item] = []
         var storeData : DataWrapper<[Item], NetworkError> = DataWrapper()
-         
-        do {
-            let result = try managedContext.fetch(CoreItem.fetchRequest())
-            if(!result.isEmpty){
-                
-                for item in result {
-                    do{
-                      
-                        coreItemsList.append(try Item(coreItem: item))
-                        
-                    }catch{
-                        storeData.error = NetworkError.invalidURL
+        DispatchQueue.main.async {
+            do {
+                let result = try self.managedContext.fetch(CoreItem.fetchRequest())
+                if(!result.isEmpty){
+                    
+                    for item in result {
+                        do{
+                            
+                            coreItemsList.append(try Item(coreItem: item))
+                            
+                        }catch{
+                            storeData.error = NetworkError.invalidURL
+                        }
                     }
+                    
                 }
-                
+                storeData.data = coreItemsList
+                self.coreDataDelegate.fetchedCoreData(storeData)
+            } catch  {
+                storeData.error = NetworkError.invalidURL
+                self.coreDataDelegate.fetchedCoreData(storeData)
             }
-            storeData.data = coreItemsList
-            coreDataDelegate.fetchedCoreData(storeData)
-        } catch  {
-            storeData.error = NetworkError.invalidURL
-            coreDataDelegate.fetchedCoreData(storeData)
         }
     }
     
     /// Save items in DB
     /// - Parameter items: list of store items
     func saveDataInDb(items : [Item] ){
-        do{
-            deleteAll()
-            for item in items {
-                let itemEntity = CoreItem(context: managedContext)
-                itemEntity.name = item.name
-                itemEntity.price = item.price
-                itemEntity.extra = item.extra
-                itemEntity.image = item.image
-                try  managedContext.save()
+       deleteAll()
+        DispatchQueue.main.async {
+            do{
+                
+                for item in items {
+                    let itemEntity = CoreItem(context: self.managedContext)
+                    itemEntity.name = item.name
+                    itemEntity.price = item.price
+                    itemEntity.extra = item.extra
+                    itemEntity.image = item.image
+                    
+                    try  self.managedContext.save()
+                    
+                }
+                
+            }catch{
+                print("Error while saving")
             }
-        }catch{
-            print("Error while saving")
         }
     }
     
     func deleteAll(){
-        do{
-            try managedContext.execute(NSBatchDeleteRequest(fetchRequest: CoreItem.fetchRequest()))
-        } catch {
-            print("error in deleting")
+        DispatchQueue.main.async {
+            do{
+                try self.managedContext.execute(NSBatchDeleteRequest(fetchRequest: CoreItem.fetchRequest()))
+            } catch {
+                print("error in deleting")
+            }
         }
     }
     

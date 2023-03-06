@@ -13,7 +13,7 @@ class GridViewController: UIViewController,StoreVMDelegate {
     private var collectionView : CustomCollectionView?
     private var loader : LoaderView?
     private var isLoading = false
-    private var viewModel: StoreViewModel = StoreViewModel.instance
+    private var viewModel: StoreViewModel = StoreViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +36,10 @@ class GridViewController: UIViewController,StoreVMDelegate {
         
         collectionView?.storeItems = vmData.data!
         isLoading = false
-        loader?.stopLoading(view: self.view)
-        loader?.removeFromSuperview()
+        DispatchQueue.main.async {
+            self.loader?.stopLoading(view: self.view)
+            self.loader?.removeFromSuperview()
+        }
         
     }
 }
