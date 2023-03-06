@@ -12,16 +12,15 @@ import Foundation
 class StoreViewModel : RepositoryDelegate {
     
     var storeRepository : StoreRepository = StoreRepository()
-    var vmDelegate : StoreVMDelegate!
+    weak var vmDelegate : StoreVMDelegate!
     static let instance = StoreViewModel(storeRepository: StoreRepository())
     
-    init(storeRepository: StoreRepository) {
+    init( storeRepository: StoreRepository) {
         self.storeRepository = storeRepository
         self.storeRepository.repositoryDelegate = self
     }
     
     init(){
-        
         self.storeRepository.repositoryDelegate = self
     }
     

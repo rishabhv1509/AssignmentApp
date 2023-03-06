@@ -12,17 +12,17 @@ import XCTest
 
 class NetworkClientTests: XCTestCase {
     
-    var networkClient: NetworkClient! 
+    var sut: NetworkClient! 
     var mockDelegate: MockNetworkDelegate!
     
     override func setUpWithError() throws {
         self.mockDelegate = MockNetworkDelegate()
-        self.networkClient = NetworkClient()
-        self.networkClient.networkDelegate = self.mockDelegate
+        self.sut = NetworkClient()
+        self.sut.networkDelegate = self.mockDelegate
     }
     
     override func tearDownWithError() throws {
-        self.networkClient = nil
+        self.sut = nil
         self.mockDelegate = nil
     }
     
@@ -31,7 +31,7 @@ class NetworkClientTests: XCTestCase {
             let validURL = Urls.getStoreData
             let expectation = XCTestExpectation(description: "Valid URL and Data")
             
-            networkClient.getResponse(urlString:validURL)
+            sut.getResponse(urlString:validURL)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 XCTAssertNotNil(self.mockDelegate.apiResponse)
@@ -53,7 +53,7 @@ class NetworkClientTests: XCTestCase {
     func testInvalidUrl() {
         let expectation = XCTestExpectation(description: "Invalid URL")
         
-        networkClient.getResponse(urlString: "invalid url")
+        sut.getResponse(urlString: "invalid url")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             XCTAssertNotNil(self.mockDelegate.apiResponse)
@@ -71,7 +71,7 @@ class NetworkClientTests: XCTestCase {
     func testValidUrlAndInvalidData() {
         let expectation = XCTestExpectation(description: "Valid URL and Invalid Data")
         
-        networkClient.getResponse(urlString: "https://jsonplaceholder.typicode.com/invalid")
+        sut.getResponse(urlString: "https://jsonplaceholder.typicode.com/invalid")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             XCTAssertNotNil(self.mockDelegate.apiResponse)

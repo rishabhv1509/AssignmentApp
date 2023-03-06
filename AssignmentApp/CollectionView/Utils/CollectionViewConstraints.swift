@@ -14,9 +14,9 @@ struct CollectionViewConstraints{
     var view : UIView
     var appBar : AppBarView
     
-    init(appBar: AppBarView, tableView: UICollectionView, view: UIView) {
+    init(appBar: AppBarView, collectionView: UICollectionView, view: UIView) {
         self.appBar = appBar
-        self.collectionView = tableView
+        self.collectionView = collectionView
         
         self.view = view
         
